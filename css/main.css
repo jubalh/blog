@@ -69,6 +69,23 @@ a:hover {
   line-height: 1.75em;
 }
 
+.categories a {
+  color: #444;
+}
+
+.categories a:hover {
+  color: #777;
+}
+
+.categories-list {
+  list-style-type: none;
+}
+
+.categories-list li {
+  text-align: center;
+  line-height: 1.75em;
+}
+
 /*****************************************************************************/
 /*
 /* Site
@@ -92,7 +109,13 @@ a:hover {
   text-align: center;
   margin-top: 0.5em;
   display: block;
+}
 
+.categories {
+  border-top: 1px solid #e7e7e7;
+  margin-top: 1em;
+  padding-top: 1.5em;
+  padding-bottom: 1.25em;
 }
 
 .posts {
@@ -235,6 +258,12 @@ a:hover {
 
 .post-link {
   margin-bottom: 0.75em;
+}
+
+.categories-title {
+  font-weight: 600;
+  font-size: 1em;
+  text-transform: uppercase;
 }
 
 .post-title {

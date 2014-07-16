@@ -26,20 +26,15 @@
             <h1 class="title"><a href="/"><img id="logo" src="{{ site.baseurl }}/images/avatar.jpg"></a></h1>
           <span class="tagline">jubalh's blog<br>a not so mental note</span>
         </div>
-		<!-- CATEGORIES
         <div class="categories">
-          <ul class="categories-list">
-            {% for post in site.posts %}
-              <li class="categories-link">
-              <a class="categories-title" href="{{ site.baseurl }}{{ post.url }}">
-                  {{ post.title }}
-                </a>
-              </li>
-              </br>
-            {% endfor %}
-          </ul>
+            <ul class="categories-list">
+                {% for category in site.categories %}
+                <li class="categories-link">
+                    <a class="categories-title" name="{{ category | first }}">{{ category | first }}</a>
+                </li>
+                {% endfor %}
+            </ul>
         </div>
-		-->
         <div class="posts">
           <ul class="posts-list">
             {% for post in site.posts %}

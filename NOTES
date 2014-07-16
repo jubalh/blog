@@ -1,0 +1,4 @@
+jekyll serve --baseurl '/blog'
+http://localhost:4000/blog/index.html
+
+https://www.andrewmunsell.com/tutorials/jekyll-by-example/tutorial

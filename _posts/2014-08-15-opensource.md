@@ -90,13 +90,15 @@ So whenever I came across something interesting, or read about new open source s
 
 In such ways I contributed to [HElib](https://github.com/shaih/HElib), a library that implements homomorphic encryption, the Telegram [desktop](https://github.com/telegramdesktop/tdesktop) and [console](https://github.com/vysheng/tg) clients, and the [ubuntu-terminal-app-plugin](https://code.launchpad.net/~ubuntu-terminal-dev/ubuntu-terminal-app/plugin) used by [cool-old-term](https://github.com/Swordifish90/cool-old-term).
 
+When I came across cool-old-term I wrote a post entitled [Canonical Launchpad]({% post_url 2014-07-30-launchpad %}). Check it out to read more about my contribution.
+
 # Ways to contribute #
 - I used something and came across an error/something unclear as a user: *Diaspora-Webclient, Homebrew*
 - I used something and wanted to improve it: *vifm*
 - I created something: *Jessy*
 - I read code and found a mistake/inconsistent style: *HELib, cool-old-term, telegram console, telegram desktop, vifm*
 - I wrote software and use third party libraries, but came across an error: *Flux*
-- Creating color themes/artwork: vifm, Vimperator*
+- Creating color themes/artwork: *vifm, Vimperator*
 
 # Fazit #
 I am aware that most of my contributions were only of a minor nature. Anyway I learned something from every single one of them. And in my eyes every little improvement is an improvement still.

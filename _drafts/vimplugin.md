@@ -20,3 +20,7 @@ vim-indent-guides
 16:54 < zamaterian> gundo is great for visualing vims undo tree, and
                     vim-dispatch for async dispatching vim-fugative for git
 					                    integration, rainbow_parentheses.vim
+
+ctrlp
+utilsnip
+

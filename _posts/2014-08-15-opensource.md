@@ -8,9 +8,9 @@ started at:   2014-07-16 11:25:00
 
 ---
 
-On twitter and on some blogs there are quite some people describing themselves as *open source evangelists* and stuff like that. Some of which I know personally. And all they do is running around and talking about how great open source is. Mostly because, they don't have to pay money for using software. Which undoubtedly is a valid reason, but not the only one. Anyway I would appreciate if they would go deeper into the subject and inform themselves about the philosphy behind Free Software, participate in open source either by writing code, creating artwork, translating or creating documentation instead of only spreading the word. Since, In my opinion, open source is already popular, and doesn't need any more advertising but people who **do** something.
+On twitter and on some blogs there are quite some people describing themselves as *open source evangelists* and stuff like that. Some of whom I know personally. And all they do is running around and talking about how great open source is. Mostly because, they don't have to pay money for using software. Which undoubtedly is a valid reason, but not the only one. Anyway I would appreciate if they would go deeper into the subject and inform themselves about the philosophy behind Free Software, participate in open source either by writing code, creating artwork, translating or creating documentation instead of only spreading the word. Since, In my opinion, open source is already popular, and doesn't need any more advertising but people who **do** something.
 
-Which brings me to the point: Most people hype open source only because they don't have to pay anything for using it. That's what they mean by *open source evangelist*. The second most frequent reason people claim they are *linux geeks* is because its **in**. At university I met (too) many people talking about Linux and claimaing they know their shit but have no idea about anything.
+Which brings me to the point: Most people hype open source only because they don't have to pay anything for using it. That's what they mean by *open source evangelist*. The second most frequent reason people claim they are *linux geeks* is because its **in**. At university I met (too) many people talking about Linux and claiming they know their shit but have no idea about anything.
 
 Just google your stuff, read a short overview and claim you know something. Real knowledge about a subject isn't required only shallow understanding and reading the headings.
 
@@ -66,25 +66,25 @@ I emailed the author and when he politely replied that he will include more colo
 Later I made a minor contribution by [removing trailing whitespaces](https://github.com/vifm/vifm/pull/46), which is a bad habit of mine. I just can't stand them... ;-)
 
 ### Jessy ###
-At Uni we had to learn Java. However I the exercises didn't really catch my attention. So to understand all the conecepts I thought about creating a [project of my own](https://github.com/jubalh/jessy).
+At Uni we had to learn Java. However the exercises didn't really catch my attention. So to understand all the concepts I thought about creating a [project of my own](https://github.com/jubalh/jessy).
 Because I was playing chess at this time, I wanted to create a little chess game. Actually just the representation of a board, containing figures. Nothing else. No move checking, no KI, man.. at first I didn't plan to give the possibillity to move at all. Just a representation of the board.
 I had so much fun with this project. Probably I will create a post of it's own for it.
 
-Anyway, at some point I came to use a chess engine, called [Flux](http://fluxchess.com/), through including it in my project I came to [fix a small error] in the project setup.
+Anyway, at some point I came to use a chess engine, called [Flux](http://fluxchess.com/), through including it in my project I came to [fix a small error](https://github.com/fluxroot/flux/pull/79) in the project setup.
 
 Through Jessy I learned a lot, at some point two people joined the team and contributed to it. I learned how to manage and coordinate a project over the internet and to use GitHub properly. And I found a mentor who was an experienced Java developer who checked my code.
 
 ### Homebrew ###
 After Jessy, I wanted to learn more about Java, and because I was interested in web development for some time, I looked at different frameworks.
 
-I came across the [Play Framework](https://www.playframework.com/) and looking for quick way to install it, `brew search`ed it.
+I came across the [Play Framework](https://www.playframework.com/) and looking for a quick way to install it, `brew search`ed it.
 The Tutorial used version 2.3 of Play, which was newer than what Homebrew provided, so I intended to update the formula.
 
 Because Play switched to Typesafe-Activator it [turned out](https://github.com/Homebrew/homebrew/pull/30262) that there was a formula containing Activator and thus Play.
 Someone pointed out that version 2.2 of Play was still in heavy used and so it came, I [added an caveat](https://github.com/jubalh/homebrew/commit/67f8919f11b0e7ca5b8987876aa750ceabdf2d4f) but then [removed Play altogether](https://github.com/jubalh/homebrew/commit/19413541411e58759faadde24138c789d80ee944) and [added it to homebrew-versions](https://github.com/Homebrew/homebrew-versions/pull/462).
 
 ## Reading code ##
-Generally I think reading code of others is a good thing to do. Sometimes you can learn a lot from it, and it trains you to understand different styled and easily comprehend what's going on. Though I have to say, most of the time it's hard for me ;-) Understanding comes slowly, but that is okay for now.
+Generally I think reading code of others is a good thing to do. Sometimes you can learn a lot from it, and it trains you to understand different styles and easily comprehend what's going on. Though I have to say, most of the time it's hard for me ;-) Understanding comes slowly, but that is okay for now.
 
 So whenever I came across something interesting, or read about new open source software on [Hacker News](https://news.ycombinator.com/) and had some free time (or not) I checked out the code and sometimes I was able to make some minor improvements. Mostly making the coding style consistent or hunting whitespaces while reading the code.
 

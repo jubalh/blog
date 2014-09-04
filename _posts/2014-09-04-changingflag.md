@@ -27,6 +27,7 @@ I tried to remember if any configuration files changed during updating. Usually 
 I didn't remember any network related changes during *dispatch-conf*.
 
 When searching for wlan0 in dmesg the only thing I got was:
+
 ```
   IPv6: ADDRCONF(NETDEV_UP): wlan0: link is not ready
 ```
@@ -34,6 +35,7 @@ When searching for wlan0 in dmesg the only thing I got was:
 I booted into my Debian which is installed alongside Funtoo, in case I break something but need a working environment for work. wifi worked here. Good. It was neither a hardware problem nor was the access point unavailable.
 
 Not wanting to reboot all the time to try things out (I was listening to an audiobook ;D), I chrooted into Funtoo:
+
 ```
   $: cd /mnt/funtoo
   $: mount -t proc none proc
@@ -53,6 +55,7 @@ On IRC I stumbled upon somebody who solved the same problem a day ago. And he ad
   Calculating dependencies -  ... done!
   [ebuild   R    ] net-misc/networkmanager-0.9.8.10-r1  USE="consolekit dhcpcd introspection nss policykit resolvconf -avahi -bluetooth -connection-sharing -dhclient -gnutls -modemmanager -plugins_openconnect -plugins_openswan -plugins_openvpn -plugins_pptp -plugins_sstp -plugins_vpnc -ppp -systemd {-test} -upower -vala -wext -wifi" 0 k
 ```
+
 
 Ohoh! What's that **-wifi**!
 

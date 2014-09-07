@@ -25,13 +25,17 @@ body {
 }
 
 a {
-  color: #8085C1;
+  color: #CF8E23;
   text-decoration: none;
   border: none;
 }
 
 a img {
   outline: none;
+}
+
+a:visited {
+  color: #DBBA4F;
 }
 
 a:hover {
@@ -175,7 +179,7 @@ a:hover {
 
 .post a,
 #about a {
-  border-bottom: 1px dashed #8085C1;
+  border-bottom: 1px dashed #CF8E23;
 }
 
 .post a:hover {

@@ -26,26 +26,31 @@
             <h1 class="title"><a href="/"><img id="logo" src="{{ site.baseurl }}/images/avatar.jpg"></a></h1>
           <span class="tagline">jubalh's blog<br>a not so mental note</span>
         </div>
+
         <div class="categories">
             <ul class="categories-list">
                 {% for category in site.categories %}
                 <li class="categories-link">
-                    <a class="categories-title" name="{{ category | first }}">{{ category | first }}</a>
+                    <p class="categories-title" name="{{ category | first }}">{{ category | first }}</p>
+                    <div class="posts">
+                        <ul class="posts-list">
+                            {% for posts in category %}
+                            {% for post in posts %}
+                            {% if post.url %}
+                            <li class="post-link">
+                                <a class="post-title" href="{{ site.baseurl }}{{ post.url }}">
+                                    <span class="post-date">{{ post.date | date_to_string }}</span>
+                                    {{ post.title }}
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
                 </li>
                 {% endfor %}
             </ul>
-        </div>
-        <div class="posts">
-          <ul class="posts-list">
-            {% for post in site.posts %}
-              <li class="post-link">
-              <a class="post-title" href="{{ site.baseurl }}{{ post.url }}">
-                  <span class="post-date">{{ post.date | date_to_string }}</span>
-                  {{ post.title }}
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
         </div>
         <div class="footer">
           <span id="footer-links">

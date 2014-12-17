@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Dev LXQt on Funtoo
+title: LXQt development on Funtoo
 cover: cover.jpg
 date:   2014-12-13 17:00:00
 categories: posts

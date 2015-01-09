@@ -189,8 +189,10 @@ a:hover {
 /* standard */
 .post pre {
   border: 1px solid #ddd;
-  background-color: #1D1B1A;
-  padding: 0 .4em;
+  background-color: #333;
+  padding: 4px;
+  border-radius: 4px;
+  overflow: scroll;
 }
 
 .post p {
@@ -208,7 +210,7 @@ a:hover {
 .post code {
   white-space: pre-line;
   border: 1px solid #ddd;
-  background-color: #1D1B1A;
+  background-color: #333;
   color: #CF8E23;
   padding: 0 .2em;
 }

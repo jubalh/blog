@@ -1,14 +1,16 @@
 ---
 layout: post
-title: Dev LXQt on Funtoo
+title: LXQt development on Funtoo
 cover: cover.jpg
 date:   2014-12-13 17:00:00
 categories: posts
 
 ---
 
-This post is about making Funtoo/Gentoo ready for developing on LXQt.
-Some people came with questions about this to the #lxde IRC channel, and most of LXQt developers run Arch Linux there is not always somebody there who can help with questions on *too.
+This post is about making Funtoo/Gentoo ready for developing on LXQt or just have the latest version installed for testing.
+Some people came with questions about this to the #lxde IRC channel, and since most of the LXQt developers run Arch Linux there is not always somebody online who can help with Gentoo questions.
+
+Note: I am doing this on Funtoo, but will use "Gentoo" from now on since it is the same procedure for both.
 
 The main point of confusion is that Gentoo has Qt5 still masked, but that is not problem at all.
 In this post I will descript how to unmask Qt5 install, unmask the needed packages and install them. Then we will clone the LXQt git repository, build it and start it.
@@ -122,6 +124,11 @@ Last step: add one of the following lines to your *.xinitrc*, or in case you use
 exec ck-launch-session dbus-launch --sh-syntax --exit-with-session startlxqt
 exec startlxqt
 ```
+
+<br/>
+<a href="{{ site.baseurl }}/images/lxqt_screenshot_1920x1080.png">
+<img src="{{ site.baseurl }}/images/lxqt_screenshot_1920x1080.png" alt="LXQt screenshot" style="width: 734px;"/>
+</a>
 
 # Other Options #
 Gentoo offers several ebuilds for LXQt, for example *lxqt-meta* which will give you a working 0.7.0 version of the desktop environment. 0.8.0 is also available but masked, the packagers decided to only support the Qt5 version of 0.8.0 altough it's not mandatory.

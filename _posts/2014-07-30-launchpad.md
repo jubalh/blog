@@ -69,7 +69,9 @@ My branch is now publicly available on Launchpad, so I [navigate to it](https://
 
 The change is now [pending for review](https://code.launchpad.net/~g-bluehut/ubuntu-terminal-app/whitespacefix/+merge/228807).
 
-![pending for review]({{ site.baseurl }}/images/ubuntu-terminal-app-review.png)
+<a href="{{ site.baseurl }}/images/ubuntu-terminal-app-review-large.png">
+<img src="{{ site.baseurl }}/images/ubuntu-terminal-app-review-large.png" alt="Pending for review" style="width: 734px;"/>
+</a>
 
 # The end #
 

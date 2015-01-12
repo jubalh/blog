@@ -60,6 +60,7 @@ On IRC I stumbled upon somebody who solved the same problem a day ago. And he ad
 Ohoh! What's that **-wifi**!
 
 Okay let's see if this flag is useful in general:
+
 ```
   $: eix -U wifi
 ```

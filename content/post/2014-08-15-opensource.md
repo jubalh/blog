@@ -1,10 +1,7 @@
 ---
-layout: post
-title: Participate in open source
-cover: cover.jpg
-date:   2014-08-15 11:25:00
-categories: posts
-started at:   2014-07-16 11:25:00
+title: "Participate in open source"
+date:   "2014-08-15"
+categories: "posts"
 
 ---
 

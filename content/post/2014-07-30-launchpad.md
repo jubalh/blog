@@ -1,9 +1,9 @@
 ---
-layout: post
-title: Canonical Launchpad
-cover: cool-old-term-cut.png
-date:   2014-07-30 14:51:00
-categories: posts
+title: "Canonical Launchpad"
+coverphoto: "cool-old-term-cut.png"
+date:	"2014-07-30"
+categories: "posts"
+
 ---
 Through a [tweet](https://twitter.com/nixcraft/statuses/494081428661870593), I stumbled upon [cool-old-term](https://github.com/Swordifish90/cool-old-term), a terminal emulator with the looks of an old cathode tube screen realized with QML.
 It was a funny idea and because I wrote a small QML Hello World example once, but didn't dig deeper into QML,I decided to check out the sourcecode and give it a look.
@@ -69,8 +69,8 @@ My branch is now publicly available on Launchpad, so I [navigate to it](https://
 
 The change is now [pending for review](https://code.launchpad.net/~g-bluehut/ubuntu-terminal-app/whitespacefix/+merge/228807).
 
-<a href="{{ site.baseurl }}/images/ubuntu-terminal-app-review-large.png">
-<img src="{{ site.baseurl }}/images/ubuntu-terminal-app-review-large.png" alt="Pending for review" style="width: 734px;"/>
+<a href="/images/ubuntu-terminal-app-review-large.png">
+<img src="/images/ubuntu-terminal-app-review-large.png" alt="Pending for review" style="width: 734px;"/>
 </a>
 
 # The end #

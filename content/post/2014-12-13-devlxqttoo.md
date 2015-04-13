@@ -1,9 +1,8 @@
 ---
-layout: post
-title: LXQt development on Funtoo
-cover: cover.jpg
-date:   2014-12-13 17:00:00
-categories: posts
+title:	"LXQt development on Funtoo"
+date:	"2014-12-13"
+categories: "posts"
+tags: "Linux"
 
 ---
 
@@ -126,8 +125,8 @@ exec startlxqt
 ```
 
 <br/>
-<a href="{{ site.baseurl }}/images/lxqt_screenshot_1920x1080.png">
-<img src="{{ site.baseurl }}/images/lxqt_screenshot_1920x1080.png" alt="LXQt screenshot" style="width: 734px;"/>
+<a href="/images/lxqt_screenshot_1920x1080.png">
+<img src="/images/lxqt_screenshot_1920x1080.png" alt="LXQt screenshot" style="width: 734px;"/>
 </a>
 
 # Other Options #

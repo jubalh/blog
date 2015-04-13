@@ -1,9 +1,7 @@
 ---
-layout: post
-title: Changing Flags
-cover: cover.jpg
-date:   2014-09-04 12:28:00
-categories: posts
+title: "Changing Flags"
+date:   "2014-09-04"
+categories: "posts"
 
 ---
 Since March 2014 I am running [Funtoo Linux](http://www.funtoo.org/Welcome) on one of my main machines.

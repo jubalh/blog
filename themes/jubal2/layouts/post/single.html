@@ -1,0 +1,20 @@
+  {{ partial "head.html" . }}
+  <body>
+    {{ partial "sidebar.html" . }}
+    <div class="content-wrapper">
+			<div id="cover-photo-container">
+				<img id="cover-photo" src="/images/{{ if .Params.coverphoto }}{{.Params.coverphoto }} {{ else }}{{.Site.Params.coverphoto}} {{ end }}">
+			</div>
+      <div class="content-wrapper__inner">
+        <div class="post">
+          <h1>{{ .Title }}</h1>
+          <span class="post-date">{{ .Date.Format "Mon, Jan 2, 2006" }}</span>
+          {{ .Content }}
+        </div>
+        {{ partial "postfooter.html" .}}
+        {{ partial "comments.html" .}}
+      </div>
+    </div>
+  </body>
+  {{ partial "script.html" .}}
+</html>

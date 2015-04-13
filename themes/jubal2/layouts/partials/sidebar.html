@@ -1,0 +1,22 @@
+<div class="sidebar" id="sidebar">
+	<div class="header">
+		<h1 class="title"><a href="/"><img id="logo" src="{{ .Site.BaseURL }}/images/avatar.jpg"></a></h1>
+		<span class="tagline">jubalh's blog<br>a not so mental note</span>
+	</div>
+
+	<div class="posts">
+		<ul class="posts-list">
+{{ range .Site.Pages }}
+{{ if .IsPage }}
+<li class="post-link"><a class="post-title" href="{{ .Permalink }}">{{ .Title }}<span class="post-date">{{ .Date.Format "Jan 2, 2006" }}</span></a></br></li>
+{{ end }}
+{{ end }}
+		</ul>
+	</div>
+	<div class="footer">
+		<span id="footer-links">
+			<a href="#" class="footer-link">About</a> <span class="separator">&bull;</span>
+			<a href="https://github.com/jubalh" class="footer-link">GitHub</a>
+		</span>
+	</div>
+</div>

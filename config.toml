@@ -1,0 +1,22 @@
+languageCode = "en-us"
+title = "jubalh's blog"
+author = "Michael Vetter"
+description = "a not so mental note"
+theme = "jubal2"
+
+contentdir = "content"
+layoutdir = "layout"
+publishdir = "public"
+baseurl = "http://jubalh.github.io/blog1"
+
+canonifyurls = true
+
+[params]
+	author = "Michael Vetter"
+	github  = "jubalh"
+	description = "a not so mental note"
+	twitter = "jubalh_"
+	email = "g.bluehut@gmail.com"
+	cv = "/pages/cv"
+	logo = "/images/avatar.jpg"
+	coverphoto = "cover.jpg"

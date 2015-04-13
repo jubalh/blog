@@ -7,7 +7,7 @@ theme = "jubal2"
 contentdir = "content"
 layoutdir = "layout"
 publishdir = "public"
-baseurl = "http://jubalh.github.io/blog1"
+baseurl = "http://jubalh.github.io/blog"
 
 canonifyurls = true
 

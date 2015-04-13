@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://jubalh.github.io/blog/</loc>
+    <lastmod>2014-12-13T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jubalh.github.io/blog/post/2014-12-13-devlxqttoo/</loc>
+    <lastmod>2014-12-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jubalh.github.io/blog/post/2014-09-04-changingflag/</loc>
+    <lastmod>2014-09-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jubalh.github.io/blog/post/2014-08-15-opensource/</loc>
+    <lastmod>2014-08-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jubalh.github.io/blog/post/2014-07-30-launchpad/</loc>
+    <lastmod>2014-07-30T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jubalh.github.io/blog/post/2014-07-16-symfony/</loc>
+    <lastmod>2014-07-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jubalh.github.io/blog/post/2014-05-03-intro/</loc>
+    <lastmod>2014-05-03T00:00:00+00:00</lastmod>
+  </url>
+  
+</urlset>

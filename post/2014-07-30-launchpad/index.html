@@ -1,0 +1,172 @@
+  <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>jubalh - jubalh&#39;s blog</title>
+		<meta name="viewport" content="width=device-width">
+
+		
+		<link rel="stylesheet" href="http://jubalh.github.io/blog/css/syntax.css">
+		
+		<link rel="stylesheet" href="http://jubalh.github.io/blog/css/main.css">
+		
+		<link rel="stylesheet" href="http://jubalh.github.io/blog/css/responsive.css">
+
+		
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:300,400,700' rel='stylesheet' type='text/css'>
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="jubalh&#39;s blog" />
+		
+		<script src="http://jubalh.github.io/blog/js/jquery.min.js"></script>
+	</head>
+
+  <body>
+    <div class="sidebar" id="sidebar">
+	<div class="header">
+		<h1 class="title"><a href="http://jubalh.github.io/blog/"><img id="logo" src="http://jubalh.github.io/blog/images/avatar.jpg"></a></h1>
+		<span class="tagline">jubalh's blog<br>a not so mental note</span>
+	</div>
+
+	<div class="posts">
+		<ul class="posts-list">
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-12-13-devlxqttoo/">LXQt development on Funtoo<span class="post-date">Dec 13, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-09-04-changingflag/">Changing Flags<span class="post-date">Sep 4, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-08-15-opensource/">Participate in open source<span class="post-date">Aug 15, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-07-30-launchpad/">Canonical Launchpad<span class="post-date">Jul 30, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-07-16-symfony/">Hear the symfony<span class="post-date">Jul 16, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-05-03-intro/">In A Galaxy Far, Far Away<span class="post-date">May 3, 2014</span></a></br></li>
+
+
+		</ul>
+	</div>
+	<div class="footer">
+		<span id="footer-links">
+			<a href="#" class="footer-link">About</a> <span class="separator">&bull;</span>
+			<a href="https://github.com/jubalh" class="footer-link">GitHub</a>
+		</span>
+	</div>
+</div>
+
+    <div class="content-wrapper">
+			<div id="cover-photo-container">
+				<img id="cover-photo" src="http://jubalh.github.io/blog/images/cool-old-term-cut.png ">
+			</div>
+      <div class="content-wrapper__inner">
+        <div class="post">
+          <h1>Canonical Launchpad</h1>
+          <span class="post-date">Wed, Jul 30, 2014</span>
+          
+
+<p>Through a <a href="https://twitter.com/nixcraft/statuses/494081428661870593">tweet</a>, I stumbled upon <a href="https://github.com/Swordifish90/cool-old-term">cool-old-term</a>, a terminal emulator with the looks of an old cathode tube screen realized with QML.
+It was a funny idea and because I wrote a small QML Hello World example once, but didn&rsquo;t dig deeper into QML,I decided to check out the sourcecode and give it a look.</p>
+
+<p>But again, I didnt&rsquo;t spent much time reading the QML but rather looked at the C++ terminal plugin behind cool-old-term.</p>
+
+<p>My vim is configured to display spaces and tabs, and because of this I found some of them at unnecessary places. I fixed them out of perfectionism (yeah I know, I am a great guy), and went on to submit my changes.</p>
+
+<p>So it came, that I used <a href="http://bazaar.canonical.com/en/">Bazaar</a> for the first time, registered at <a href="https://launchpad.net/">Launchpad</a> and made my first contribution on that platform.</p>
+
+<h1 id="terminology:e4b86f8f071132acd15659476e92ecef">Terminology</h1>
+
+<p>Bazaar is a version control system which is sponsored by Canonical. It&rsquo;s similiar to git in the way that it&rsquo;s also distributed and doesn&rsquo;t use a central server like for example SVN.</p>
+
+<p>Launchpad is a platform to host sourcecode, report bugs and generally administer open source projects, similar to GitHub or Sourceforge. Like Bazaar it&rsquo;s maintained by Canonical and thus heavily used in the development of Ubuntu Linux related software.</p>
+
+<h1 id="making-the-change:e4b86f8f071132acd15659476e92ecef">Making the change</h1>
+
+<p>I just intend to read the code not compile it, so I stay on OSX and install Bazaar via Homebrew.</p>
+
+<pre><code>  brew install bzr
+</code></pre>
+
+<p>Since I know nothing more about Bazaar other than what it is and some of it&rsquo;s differences and similarities related to git. I read a the basic introduction <a href="http://doc.bazaar.canonical.com/latest/en/mini-tutorial/">Bazaar in five minutes</a> to learn the most basic commands.</p>
+
+<p>This was already enough to get me started, so I set my username and checked out the ubuntu-terminal-app.
+Like on GitHub you need to register an ssh key on Launchpad, which I copy using the last of the following lines.</p>
+
+<pre><code>cd ~/src/ubuntu-terminal-app
+$ bzr branch https://launchpad.net/ubuntu-terminal-app
+Not checking SSL certificate for launchpad.net.
+Branched 101 revisions.
+
+$ bzr whoami &quot;Michael Vetter &lt;g.bluehut@gmail.com&gt;&quot;
+$ bzr launchpad-login g-bluehut
+$ cat ~/.ssh/id_rsa.pub | pbcopy
+</code></pre>
+
+<p>Now I <a href="https://launchpad.net/people/+me/+editsshkeys">paste them to my profile</a> and am ready to make my changes.
+Adding and commiting files is similar like with git:</p>
+
+<pre><code>$ bzr add
+
+$ bzr commit
+Committing to: /Users/michael/src/bzr2/ub-kn/bluehut/
+modified src/plugin/konsole/Character.h
+modified src/plugin/konsole/ColorScheme.cpp
+modified src/plugin/konsole/Vt102Emulation.cpp
+...
+modified src/plugin/konsole/ksession.h
+Committed revision 102.
+
+$ bzr push lp:~/g-bluehut/ubuntu-terminal-app/whitespacefix/
+bzr: ERROR: Permission denied: &quot;~g-bluehut/g-bluehut/ubuntu-terminal-app/whitespacefix/&quot;:
+: Cannot create branch at '/~g-bluehut/g-bluehut/ubuntu-terminal-app/whitespacefix'
+</code></pre>
+
+<p>At first I got confused why I didn&rsquo;t have permission to push to my repo and looked for different causes, reading the line again I saw that I wasted the time because of an typo&hellip;
+The first slash on the line was evildoer. The good thing was, while looking for my mistake I learned that I can abbreviate my last command to <code>$ bzr push:~/ubuntu-terminal-app/whitespacefix</code> because Bazaar knows my username already.</p>
+
+<p>My branch is now publicly available on Launchpad, so I <a href="https://code.launchpad.net/~g-bluehut/ubuntu-terminal-app/whitespacefix">navigate to it</a> and click on <em>Propose for merging</em> choose the branch to merge into, which in my case is <em>lp:ubuntu-terminal-app</em>, I don&rsquo;t provide a description because I assume the commit message is meaningful enough for this small change and click on <em>propose merge</em>.</p>
+
+<p>The change is now <a href="https://code.launchpad.net/~g-bluehut/ubuntu-terminal-app/whitespacefix/+merge/228807">pending for review</a>.</p>
+
+<p><a href="http://jubalh.github.io/blog/images/ubuntu-terminal-app-review-large.png">
+<img src="http://jubalh.github.io/blog/images/ubuntu-terminal-app-review-large.png" alt="Pending for review" style="width: 734px;"/>
+</a></p>
+
+<h1 id="the-end:e4b86f8f071132acd15659476e92ecef">The end</h1>
+
+<p>At first Launchpad seemed quite confusing to me, and even though it got better after some time of using it I still think GitHub is much more clear and easier to use.</p>
+
+<p>After committing my change I read some pages which I found during my journey. Thanks again slash-typo!</p>
+
+<ul>
+<li><a href="http://packaging.ubuntu.com/html/patches-to-packages.html">Patches to Packages</a></li>
+<li><a href="http://packaging.ubuntu.com/html/fixing-a-bug.html">Fixing a bug</a></li>
+<li><a href="http://doc.bazaar.canonical.com/migration/en/survival/bzr-for-git-users.html">Bazaar for git users</a></li>
+</ul>
+
+        </div>
+        <footer class="footer"><p>Composed with vim. Published on Wed, Jul 30, 2014 via Hugo.
+</br>© Michael Vetter</p></footer>
+
+        <section class="post-comments">
+
+
+</section>
+
+      </div>
+    </div>
+  </body>
+  
+</html>

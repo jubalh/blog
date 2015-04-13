@@ -1,0 +1,151 @@
+  <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>jubalh - jubalh&#39;s blog</title>
+		<meta name="viewport" content="width=device-width">
+
+		
+		<link rel="stylesheet" href="http://jubalh.github.io/blog/css/syntax.css">
+		
+		<link rel="stylesheet" href="http://jubalh.github.io/blog/css/main.css">
+		
+		<link rel="stylesheet" href="http://jubalh.github.io/blog/css/responsive.css">
+
+		
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:300,400,700' rel='stylesheet' type='text/css'>
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="jubalh&#39;s blog" />
+		
+		<script src="http://jubalh.github.io/blog/js/jquery.min.js"></script>
+	</head>
+
+  <body>
+    <div class="sidebar" id="sidebar">
+	<div class="header">
+		<h1 class="title"><a href="http://jubalh.github.io/blog/"><img id="logo" src="http://jubalh.github.io/blog/images/avatar.jpg"></a></h1>
+		<span class="tagline">jubalh's blog<br>a not so mental note</span>
+	</div>
+
+	<div class="posts">
+		<ul class="posts-list">
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-12-13-devlxqttoo/">LXQt development on Funtoo<span class="post-date">Dec 13, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-09-04-changingflag/">Changing Flags<span class="post-date">Sep 4, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-08-15-opensource/">Participate in open source<span class="post-date">Aug 15, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-07-30-launchpad/">Canonical Launchpad<span class="post-date">Jul 30, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-07-16-symfony/">Hear the symfony<span class="post-date">Jul 16, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-05-03-intro/">In A Galaxy Far, Far Away<span class="post-date">May 3, 2014</span></a></br></li>
+
+
+		</ul>
+	</div>
+	<div class="footer">
+		<span id="footer-links">
+			<a href="#" class="footer-link">About</a> <span class="separator">&bull;</span>
+			<a href="https://github.com/jubalh" class="footer-link">GitHub</a>
+		</span>
+	</div>
+</div>
+
+    <div class="content-wrapper">
+			<div id="cover-photo-container">
+				<img id="cover-photo" src="http://jubalh.github.io/blog/images/cover.jpg ">
+			</div>
+      <div class="content-wrapper__inner">
+        <div class="post">
+          <h1>Changing Flags</h1>
+          <span class="post-date">Thu, Sep 4, 2014</span>
+          <p>Since March 2014 I am running <a href="http://www.funtoo.org/Welcome">Funtoo Linux</a> on one of my main machines.
+It&rsquo;s a great distribution, I learn a lot while using it.</p>
+
+<p>Updating always went smoothly until yesterday, when I had troubles for the first time.</p>
+
+<p>I started my computer after the update and couldn&rsquo;t connect through to my wifi anymore. I wondered what was the reason but didn&rsquo;t find it fast enough, because I had to go to work. Taking the notebook with me I connect it to the  universities LAN and all goes well.</p>
+
+<p>At home again, I try to find the error. I use NetworkManager and nm-applet to configure my connections. nm-applet always gave me an <em>device not present</em>
+I tried to remember if any configuration files changed during updating. Usually I update like this:</p>
+
+<pre><code>  $: emerge --sync
+  $: emerge -aDNuv world
+  $: emerge --depclean
+  $: revdep-rebuild
+  $: dispatch-conf
+</code></pre>
+
+<p>I didn&rsquo;t remember any network related changes during <em>dispatch-conf</em>.</p>
+
+<p>When searching for wlan0 in dmesg the only thing I got was:</p>
+
+<pre><code>  IPv6: ADDRCONF(NETDEV_UP): wlan0: link is not ready
+</code></pre>
+
+<p>I booted into my Debian which is installed alongside Funtoo, in case I break something but need a working environment for work. wifi worked here. Good. It was neither a hardware problem nor was the access point unavailable.</p>
+
+<p>Not wanting to reboot all the time to try things out (I was listening to an audiobook ;D), I chrooted into Funtoo:</p>
+
+<pre><code>  $: cd /mnt/funtoo
+  $: mount -t proc none proc
+  $: mount --rbind /sys sys
+  $: mount --rbind /dev dev &amp;&amp; cp /etc/resolv.conf etc/
+  $: chroot /mnt/funtoo /bin/bash -i
+</code></pre>
+
+<p>I tried an <code>iwlist scan</code> which showed me my access point, seems like network and wifi was generally working, must be an issue of networkmanager or nm-applet.
+On IRC I stumbled upon somebody who solved the same problem a day ago. And he advised me to look for changed use flags.</p>
+
+<pre><code>  $: emerge -pv networkmanager
+
+  These are the packages that would be merged, in order:
+
+  Calculating dependencies -  ... done!
+  [ebuild   R    ] net-misc/networkmanager-0.9.8.10-r1  USE=&quot;consolekit dhcpcd introspection nss policykit resolvconf -avahi -bluetooth -connection-sharing -dhclient -gnutls -modemmanager -plugins_openconnect -plugins_openswan -plugins_openvpn -plugins_pptp -plugins_sstp -plugins_vpnc -ppp -systemd {-test} -upower -vala -wext -wifi&quot; 0 k
+</code></pre>
+
+<p>Ohoh! What&rsquo;s that <strong>-wifi</strong>!</p>
+
+<p>Okay let&rsquo;s see if this flag is useful in general:</p>
+
+<pre><code>  $: eix -U wifi
+</code></pre>
+
+<p>Shows me a bunch of packages which contain this flag, for example <em>Thunderbird</em>. Uh? What will this flag do in Thunderbird?
+Okay, since I have no idea, I am going for the standard way and change the use flag on a per package basis.</p>
+
+<p>Adding <code>net-misc/networkmanager wifi</code> to <em>/etc/portage/package.use</em> and doing an <code>emerge -aDNuv networkmanager</code> to rebuild the package I solved the problem.</p>
+
+<p>So because netoworkmanager got an additional flag to enable wifi management which was disabled by default my wifi didn&rsquo;t work anymore. This was the first time I came across a problem like this and I wouldn&rsquo;t have thought about this before. Let&rsquo;s keep this in mind!</p>
+
+        </div>
+        <footer class="footer"><p>Composed with vim. Published on Thu, Sep 4, 2014 via Hugo.
+</br>© Michael Vetter</p></footer>
+
+        <section class="post-comments">
+
+
+</section>
+
+      </div>
+    </div>
+  </body>
+  
+</html>

@@ -1,0 +1,184 @@
+  <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>jubalh - jubalh&#39;s blog</title>
+		<meta name="viewport" content="width=device-width">
+
+		
+		<link rel="stylesheet" href="http://jubalh.github.io/blog/css/syntax.css">
+		
+		<link rel="stylesheet" href="http://jubalh.github.io/blog/css/main.css">
+		
+		<link rel="stylesheet" href="http://jubalh.github.io/blog/css/responsive.css">
+
+		
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:300,400,700' rel='stylesheet' type='text/css'>
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="jubalh&#39;s blog" />
+		
+		<script src="http://jubalh.github.io/blog/js/jquery.min.js"></script>
+	</head>
+
+  <body>
+    <div class="sidebar" id="sidebar">
+	<div class="header">
+		<h1 class="title"><a href="http://jubalh.github.io/blog/"><img id="logo" src="http://jubalh.github.io/blog/images/avatar.jpg"></a></h1>
+		<span class="tagline">jubalh's blog<br>a not so mental note</span>
+	</div>
+
+	<div class="posts">
+		<ul class="posts-list">
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-12-13-devlxqttoo/">LXQt development on Funtoo<span class="post-date">Dec 13, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-09-04-changingflag/">Changing Flags<span class="post-date">Sep 4, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-08-15-opensource/">Participate in open source<span class="post-date">Aug 15, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-07-30-launchpad/">Canonical Launchpad<span class="post-date">Jul 30, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-07-16-symfony/">Hear the symfony<span class="post-date">Jul 16, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-05-03-intro/">In A Galaxy Far, Far Away<span class="post-date">May 3, 2014</span></a></br></li>
+
+
+		</ul>
+	</div>
+	<div class="footer">
+		<span id="footer-links">
+			<a href="#" class="footer-link">About</a> <span class="separator">&bull;</span>
+			<a href="https://github.com/jubalh" class="footer-link">GitHub</a>
+		</span>
+	</div>
+</div>
+
+    <div class="content-wrapper">
+			<div id="cover-photo-container">
+				<img id="cover-photo" src="http://jubalh.github.io/blog/images/cover.jpg ">
+			</div>
+      <div class="content-wrapper__inner">
+        <div class="post">
+          <h1>Hear the symfony</h1>
+          <span class="post-date">Wed, Jul 16, 2014</span>
+          <p>When I moved here to start going to university, I searched for interesting companies to work for. One of them stated on their website that they use the <a href="http://symfony.com/">symfony2</a> PHP framework.&rdquo;
+I have never done much in the web area, but have always been interested in getting started. Because I was totally in exam period I rather should have studied, but decided to give symfony a quick look.</p>
+
+<p>Somfonys website is excellent. A lot of information, and very clearly presented.
+Nevertheless it took my some time to set it up, mainly because I never did it before nor played with PHP.</p>
+
+<p>To get an overview I followed their guide <a href="http://symfony.com/doc/current/quick_tour/the_big_picture.html">The Big picture</a>.</p>
+
+<p>You should also now that I did all this on OSX.</p>
+
+<p>First thing is to install symphony via <a href="https://getcomposer.org/">composer</a>, a PHP dependency management tool. For some reason it was already installed on my computer, but I don&rsquo;t know if I played with PHP before and installed computer on the way or if it ships with OSX be default. I assume that I installed it myself and forgot about it though.</p>
+
+<p>Installing composor isn&rsquo;t difficult at all on OSX you can do it via homebrew:</p>
+
+<pre><code>  brew update     
+  brew tap homebrew/homebrew-php     
+  brew tap homebrew/dupes     
+  brew tap homebrew/versions
+  brew install php55-intl
+  brew install homebrew/php/composer
+</code></pre>
+
+<p>And for other operating systems you can just follow their <a href="https://getcomposer.org/doc/00-intro.md#installation-nix">installation instructions</a>.</p>
+
+<p>Unfortunately installing symfony itself, was the first thing that didn&rsquo;t work.</p>
+
+<pre><code>  $: composer create-project symfony/framework-standard-edition myproject/ 2.5`
+  
+  Installing symfony/framework-standard-edition (v2.5.0)
+    - Installing symfony/framework-standard-edition (v2.5.0)
+        Loading from cache
+
+        Created project in myproject/
+        Loading composer repositories with package information
+        Installing dependencies (including require-dev)
+  
+  Fatal error: Allowed memory size of 536870912 bytes exhausted (tried to allocate 32 bytes)
+  in phar:///usr/local/Cellar/composer/1.0.0-alpha8/libexec/composer.phar/src/
+</code></pre>
+
+<p>Seems like something is running out of memory, but why? It isn&rsquo;t that much after all.
+After some investigating it seemed like Composer was running out of memory when trying to build the dependency tree. And that I can configure how much memory it has at it&rsquo;s disposal in the PHP config.</p>
+
+<p>In /usr/local/etc/php/5.5/php.ini I looked for <em>memory_limit</em> and changed it&rsquo;s value to <em>-1</em> for unlimited. Since this is my private machine used for development this should be okay.</p>
+
+<p>No luck.</p>
+
+<pre><code>$ php -i | grep ini
+Configuration File (php.ini) Path =&gt; /etc
+
+$ php -i | grep Loaded Configuration
+Loaded Configuration File = (none)
+</code></pre>
+
+<p>Aha! PHP thought my ini is in <code>/etc/</code> when I really edited the one in <code>/usr/local/etc/php/5.5/php.ini</code>. However when looking into the directory I saw that there was a template file, which I decided to edit instead.</p>
+
+<pre><code>$ cp /etc/php.ini.default /etc/php.ini
+$ su vim /etc/php.ini
+</code></pre>
+
+<p>Making the same change in this file and saving it I eliminated the error, but got a new one in return.</p>
+
+<pre><code>$ composer create-project symfony/framework-standard-edition myproject/ ~2.5
+
+[Symfony\Component\Debug\Exception\ContextErrorException]
+ Warning: date_default_timezone_get(): It is not safe to rely on the system's timezone settings.
+ You are *required* to use the date.timezone setting or the date_default_timezone_set() function.
+ In case you used any of those methods and you are still getting this warning, you most likely
+ misspelled the timezone identifier. We selected the timezone 'UTC' for now, 
+ but please set date.timezone to select your timezone. in 
+ /Users/alguen/src/symfonytest/myproject/vendor/monolog/monolog/src/Monolog/Logger.php line 233
+</code></pre>
+
+<p>The message continued with several other errors, but one step at a time, right?
+When looking for <em>timezone</em> in my PHP.ini I found</p>
+
+<pre><code>[Date]
+; Defines the default timezone used by the date functions
+; http://php.net/date.timezone
+;date.timezone =
+</code></pre>
+
+<p>So there was one more mistake to fix, the line was commented out.
+Checking <a href="http://php.net/date.timezone">http://php.net/date.timezone</a> for the correct syntax, I used: <code>date.timezone = &quot;Europe/Berlin&quot;</code> ran the installation command again and: it worked!</p>
+
+<p>After this the tutorial was a breeze, and gave me a nice overview of symfony.
+Being my first time engaging in web development stuff, I also enjoyed the chapter <a href="http://symfony.com/doc/current/book/http_fundamentals.html">HTTP Fundamentals</a> in their online <a href="http://symfony.com/doc/current/book/index.html">symfony book</a>.</p>
+
+<p>Actually, let&rsquo;s just work through that now too.
+What? Exams in two days? Oh well&hellip;</p>
+
+<p>I know my priorities.</p>
+
+        </div>
+        <footer class="footer"><p>Composed with vim. Published on Wed, Jul 16, 2014 via Hugo.
+</br>© Michael Vetter</p></footer>
+
+        <section class="post-comments">
+
+
+</section>
+
+      </div>
+    </div>
+  </body>
+  
+</html>

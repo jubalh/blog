@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>jubalh&#39;s blog</title>
+    <link>http://jubalh.github.io/blog/</link>
+    <description>Recent content on jubalh&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 13 Dec 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://jubalh.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>LXQt development on Funtoo</title>
+      <link>http://jubalh.github.io/blog/post/2014-12-13-devlxqttoo/</link>
+      <pubDate>Sat, 13 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://jubalh.github.io/blog/post/2014-12-13-devlxqttoo/</guid>
+      <description>
+
+&lt;p&gt;This post is about making Funtoo/Gentoo ready for developing on LXQt or just have the latest version installed for testing.
+Some people came with questions about this to the #lxde IRC channel, and since most of the LXQt developers run Arch Linux there is not always somebody online who can help with Gentoo questions.&lt;/p&gt;
+
+&lt;p&gt;Note: I am doing this on Funtoo, but will use &amp;ldquo;Gentoo&amp;rdquo; from now on since it is the same procedure for both.&lt;/p&gt;
+
+&lt;p&gt;The main point of confusion is that Gentoo has Qt5 still masked, but that is not problem at all.
+In this post I will descript how to unmask Qt5 install, unmask the needed packages and install them. Then we will clone the LXQt git repository, build it and start it.&lt;/p&gt;
+
+&lt;h1 id=&#34;unmasking:ca158e9143a61b4f7cb2040e761492c6&#34;&gt;Unmasking&lt;/h1&gt;
+
+&lt;p&gt;&lt;br/&gt;
+First let&amp;rsquo;s unmask Qt5.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$: vim /etc/portage/profile/use.mask
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And write &lt;strong&gt;-qt5&lt;/strong&gt; in there. Since Qt5 &lt;em&gt;is&lt;/em&gt; masked, we need to take it away(-).&lt;/p&gt;
+
+&lt;p&gt;Now add the following lines to &lt;em&gt;/etc/portage/package.unmask&lt;/em&gt;:
+&lt;br/&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt;=kde-frameworks/kwindowsystem-5.4.0
+&amp;gt;=dev-qt/qtwidgets-5.4.0
+&amp;gt;=dev-qt/qtx11extras-5.4.0
+&amp;gt;=dev-qt/qtgui-5.4.0
+&amp;gt;=dev-qt/qtcore-5.4.0
+&amp;gt;=dev-qt/qtxml-5.4.0
+&amp;gt;=dev-qt/qtsvg-5.4.0
+&amp;gt;=dev-qt/linguist-tools-5.4.0
+&amp;gt;=dev-libs/libpcre-8.36
+&amp;gt;=kde-frameworks/kguiaddons-5.4.0
+&amp;gt;=dev-qt/qtdbus-5.4.0
+&amp;gt;=dev-qt/qtconcurrent-5.4.0
+&amp;gt;=dev-qt/qtsvg-5.4.0
+&amp;gt;=dev-qt/qtscript-5.4.0
+&amp;gt;=dev-qt/qtprintsupport-5.4.0
+&amp;gt;=kde-frameworks/kguiaddons-5.4.0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will unmask all the names packages with from version 5.4.0 and on. You could also just add &lt;em&gt;=kde-frameworks/kguiaddons-5.4.0&lt;/em&gt; without the &lt;em&gt;&amp;gt;&lt;/em&gt; to only unmask that one version.
+Since you might read ths blog post later I added it to make sure it works on all later versions too. And besides I use it like that, too.&lt;/p&gt;
+
+&lt;h1 id=&#34;use-flags:ca158e9143a61b4f7cb2040e761492c6&#34;&gt;USE flags&lt;/h1&gt;
+
+&lt;p&gt;Fire up &lt;em&gt;vim&lt;/em&gt; and add the following packages with USE flags to your &lt;em&gt;/etc/portage/package.use&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;dev-libs/libpcre-8.36 pcre16
+sys-auth/polkit-qt qt5 -qt4
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;installation:ca158e9143a61b4f7cb2040e761492c6&#34;&gt;Installation&lt;/h1&gt;
+
+&lt;h2 id=&#34;dependencies:ca158e9143a61b4f7cb2040e761492c6&#34;&gt;Dependencies&lt;/h2&gt;
+
+&lt;p&gt;First let&amp;rsquo;s try if an example KF5 package can be installed.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$: emerge -a kwindowsystem
+
+These are the packages that would be merged, in order:
+
+Calculating dependencies... done!
+[ebuild   R    ] dev-libs/libpcre-8.36  USE=&amp;quot;pcre16*&amp;quot; 
+[ebuild  NS   #] dev-qt/qtcore-5.4.0 [4.8.6-r1] USE=&amp;quot;icu -debug -systemd {-test}&amp;quot; 
+[ebuild  N    #] dev-qt/qtxml-5.4.0  USE=&amp;quot;-debug {-test}&amp;quot; 
+[ebuild  N    #] dev-qt/linguist-tools-5.4.0  USE=&amp;quot;-debug -qml {-test}&amp;quot; 
+[ebuild  N     ] dev-libs/extra-cmake-modules-1.4.0  USE=&amp;quot;-doc&amp;quot; 
+[ebuild  NS   #] dev-qt/qtgui-5.4.0 [4.8.6-r1] USE=&amp;quot;gif harfbuzz jpeg opengl png udev xcb -accessibility -debug -egl -eglfs -evdev -gles2 -ibus -kms {-test}&amp;quot; 
+[ebuild  N    #] dev-qt/qtwidgets-5.4.0  USE=&amp;quot;opengl png xcb -debug -gles2 {-test}&amp;quot; 
+[ebuild  N     ] kde-frameworks/kf-env-3 
+[ebuild  N    #] dev-qt/qtx11extras-5.4.0  USE=&amp;quot;-debug {-test}&amp;quot; 
+[ebuild  N    #] kde-frameworks/kwindowsystem-5.4.0  USE=&amp;quot;X nls -debug -doc {-test}&amp;quot; 
+
+Would you like to merge these packages? [Yes/No] Yes
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Nice. So our changes were right.&lt;/p&gt;
+
+&lt;p&gt;For LXQt we will need to install the following additional packages:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;kguiaddons&lt;/li&gt;
+&lt;li&gt;liboobs&lt;/li&gt;
+&lt;li&gt;polkit-qt&lt;/li&gt;
+&lt;li&gt;qtsvg&lt;/li&gt;
+&lt;li&gt;qtscript&lt;/li&gt;
+&lt;li&gt;qtprintsupport&lt;/li&gt;
+&lt;li&gt;libconfig&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;And because LXQt uses openbox as it&amp;rsquo;s window manager you should also install the &lt;em&gt;openbox&lt;/em&gt; package.
+Actually you can configure it to use another one, but the install script still checks for &lt;em&gt;obrender&lt;/em&gt; and another package by openbox.&lt;/p&gt;
+
+&lt;h1 id=&#34;building:ca158e9143a61b4f7cb2040e761492c6&#34;&gt;Building&lt;/h1&gt;
+
+&lt;p&gt;Okay, just go somewhere and clone the repo in there. I have the habit of putting all code in &lt;em&gt;~/src&lt;/em&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$: cd src
+$: git clone https://github.com/lxde/lxqt
+$: git submodule init
+$: git submodule update --remote --rebase
+
+$: LXQT_PREFIX=/usr USE_QT5=true ./build_all.sh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The project is splitted in different repositories. The first git command will clone the main repository, then we will get the others, which are added as git submodules.
+Although there is also an CMake script in the repo, this doesn&amp;rsquo;t get much love from the devs, at least I have never found it to work properly. I guess eventually it will get removed and only the bas script will be there.
+Qt5 is still not set as default in the build script, altough LXQt 0.8.0 is able to use Qt5, and from any version greater than the it is even mandatory. Qt4 support is totally dropped. Anyways, that&amp;rsquo;s the reason we need to tell the script in detail. Also I want to install all stuff in the &lt;em&gt;/usr&lt;/em&gt; directory, so I added the prefix.&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s it. We did it.&lt;/p&gt;
+
+&lt;p&gt;Last step: add one of the following lines to your &lt;em&gt;.xinitrc&lt;/em&gt;, or in case you use a loging manager, configure it to start LXQt:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;exec ck-launch-session dbus-launch --sh-syntax --exit-with-session startlxqt
+exec startlxqt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;br/&gt;
+&lt;a href=&#34;http://jubalh.github.io/blog/images/lxqt_screenshot_1920x1080.png&#34;&gt;
+&lt;img src=&#34;http://jubalh.github.io/blog/images/lxqt_screenshot_1920x1080.png&#34; alt=&#34;LXQt screenshot&#34; style=&#34;width: 734px;&#34;/&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;other-options:ca158e9143a61b4f7cb2040e761492c6&#34;&gt;Other Options&lt;/h1&gt;
+
+&lt;p&gt;Gentoo offers several ebuilds for LXQt, for example &lt;em&gt;lxqt-meta&lt;/em&gt; which will give you a working 0.7.0 version of the desktop environment. 0.8.0 is also available but masked, the packagers decided to only support the Qt5 version of 0.8.0 altough it&amp;rsquo;s not mandatory.
+There is also an live ebuild, but since this post is centered around people who want to change the code and not just install the latest version available I described the way using git.&lt;/p&gt;
+
+&lt;h1 id=&#34;references:ca158e9143a61b4f7cb2040e761492c6&#34;&gt;References&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://wiki.lxde.org/en/Build_LXDE-Qt_From_Source&#34;&gt;Build LXDE-Qt from source&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://wiki.gentoo.org/wiki/Qt/Qt5&#34;&gt;Qt5 on Gentoo Wiki&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://wiki.gentoo.org/wiki/KDE/Overlay/Frameworks_5&#34;&gt;Frameworks 5 on Gentoo Wiki&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Changing Flags</title>
+      <link>http://jubalh.github.io/blog/post/2014-09-04-changingflag/</link>
+      <pubDate>Thu, 04 Sep 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://jubalh.github.io/blog/post/2014-09-04-changingflag/</guid>
+      <description>&lt;p&gt;Since March 2014 I am running &lt;a href=&#34;http://www.funtoo.org/Welcome&#34;&gt;Funtoo Linux&lt;/a&gt; on one of my main machines.
+It&amp;rsquo;s a great distribution, I learn a lot while using it.&lt;/p&gt;
+
+&lt;p&gt;Updating always went smoothly until yesterday, when I had troubles for the first time.&lt;/p&gt;
+
+&lt;p&gt;I started my computer after the update and couldn&amp;rsquo;t connect through to my wifi anymore. I wondered what was the reason but didn&amp;rsquo;t find it fast enough, because I had to go to work. Taking the notebook with me I connect it to the  universities LAN and all goes well.&lt;/p&gt;
+
+&lt;p&gt;At home again, I try to find the error. I use NetworkManager and nm-applet to configure my connections. nm-applet always gave me an &lt;em&gt;device not present&lt;/em&gt;
+I tried to remember if any configuration files changed during updating. Usually I update like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $: emerge --sync
+  $: emerge -aDNuv world
+  $: emerge --depclean
+  $: revdep-rebuild
+  $: dispatch-conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I didn&amp;rsquo;t remember any network related changes during &lt;em&gt;dispatch-conf&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;When searching for wlan0 in dmesg the only thing I got was:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  IPv6: ADDRCONF(NETDEV_UP): wlan0: link is not ready
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I booted into my Debian which is installed alongside Funtoo, in case I break something but need a working environment for work. wifi worked here. Good. It was neither a hardware problem nor was the access point unavailable.&lt;/p&gt;
+
+&lt;p&gt;Not wanting to reboot all the time to try things out (I was listening to an audiobook ;D), I chrooted into Funtoo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $: cd /mnt/funtoo
+  $: mount -t proc none proc
+  $: mount --rbind /sys sys
+  $: mount --rbind /dev dev &amp;amp;&amp;amp; cp /etc/resolv.conf etc/
+  $: chroot /mnt/funtoo /bin/bash -i
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I tried an &lt;code&gt;iwlist scan&lt;/code&gt; which showed me my access point, seems like network and wifi was generally working, must be an issue of networkmanager or nm-applet.
+On IRC I stumbled upon somebody who solved the same problem a day ago. And he advised me to look for changed use flags.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $: emerge -pv networkmanager
+
+  These are the packages that would be merged, in order:
+
+  Calculating dependencies -  ... done!
+  [ebuild   R    ] net-misc/networkmanager-0.9.8.10-r1  USE=&amp;quot;consolekit dhcpcd introspection nss policykit resolvconf -avahi -bluetooth -connection-sharing -dhclient -gnutls -modemmanager -plugins_openconnect -plugins_openswan -plugins_openvpn -plugins_pptp -plugins_sstp -plugins_vpnc -ppp -systemd {-test} -upower -vala -wext -wifi&amp;quot; 0 k
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ohoh! What&amp;rsquo;s that &lt;strong&gt;-wifi&lt;/strong&gt;!&lt;/p&gt;
+
+&lt;p&gt;Okay let&amp;rsquo;s see if this flag is useful in general:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $: eix -U wifi
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Shows me a bunch of packages which contain this flag, for example &lt;em&gt;Thunderbird&lt;/em&gt;. Uh? What will this flag do in Thunderbird?
+Okay, since I have no idea, I am going for the standard way and change the use flag on a per package basis.&lt;/p&gt;
+
+&lt;p&gt;Adding &lt;code&gt;net-misc/networkmanager wifi&lt;/code&gt; to &lt;em&gt;/etc/portage/package.use&lt;/em&gt; and doing an &lt;code&gt;emerge -aDNuv networkmanager&lt;/code&gt; to rebuild the package I solved the problem.&lt;/p&gt;
+
+&lt;p&gt;So because netoworkmanager got an additional flag to enable wifi management which was disabled by default my wifi didn&amp;rsquo;t work anymore. This was the first time I came across a problem like this and I wouldn&amp;rsquo;t have thought about this before. Let&amp;rsquo;s keep this in mind!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Participate in open source</title>
+      <link>http://jubalh.github.io/blog/post/2014-08-15-opensource/</link>
+      <pubDate>Fri, 15 Aug 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://jubalh.github.io/blog/post/2014-08-15-opensource/</guid>
+      <description>
+
+&lt;p&gt;On twitter and on some blogs there are quite some people describing themselves as &lt;em&gt;open source evangelists&lt;/em&gt; and stuff like that. Some of whom I know personally. And all they do is running around and talking about how great open source is. Mostly because, they don&amp;rsquo;t have to pay money for using software. Which undoubtedly is a valid reason, but not the only one. Anyway I would appreciate if they would go deeper into the subject and inform themselves about the philosophy behind Free Software, participate in open source either by writing code, creating artwork, translating or creating documentation instead of only spreading the word. Since, In my opinion, open source is already popular, and doesn&amp;rsquo;t need any more advertising but people who &lt;strong&gt;do&lt;/strong&gt; something.&lt;/p&gt;
+
+&lt;p&gt;Which brings me to the point: Most people hype open source only because they don&amp;rsquo;t have to pay anything for using it. That&amp;rsquo;s what they mean by &lt;em&gt;open source evangelist&lt;/em&gt;. The second most frequent reason people claim they are &lt;em&gt;linux geeks&lt;/em&gt; is because its &lt;strong&gt;in&lt;/strong&gt;. At university I met (too) many people talking about Linux and claiming they know their shit but have no idea about anything.&lt;/p&gt;
+
+&lt;p&gt;Just google your stuff, read a short overview and claim you know something. Real knowledge about a subject isn&amp;rsquo;t required only shallow understanding and reading the headings.&lt;/p&gt;
+
+&lt;h1 id=&#34;stop-crying-man:130150900c6183f60d99464c51348c02&#34;&gt;Stop crying, man&lt;/h1&gt;
+
+&lt;p&gt;Okay, I hear ya.
+Now let&amp;rsquo;s get to the point :-)&lt;/p&gt;
+
+&lt;p&gt;I am using GNU/Linux since 10 or 11 years and since a few months I wanted to participate, learn more and give back to the community.&lt;/p&gt;
+
+&lt;p&gt;Sometimes it&amp;rsquo;s hard to find the right way to do something, this post is about ways to contribute and my first contributions.&lt;/p&gt;
+
+&lt;h1 id=&#34;finding-a-project:130150900c6183f60d99464c51348c02&#34;&gt;Finding a project&lt;/h1&gt;
+
+&lt;p&gt;For several weeks I was on and off looking at &lt;a href=&#34;http://openhatch.org/search/&#34;&gt;OpenHatch&lt;/a&gt; and scanning the abandoned projects at &lt;a href=&#34;http://sourceforge.net/&#34;&gt;SourceForge&lt;/a&gt; and the likes.&lt;/p&gt;
+
+&lt;p&gt;Somehow I didn&amp;rsquo;t find the right fit.&lt;/p&gt;
+
+&lt;p&gt;So after looking at several projects which didn&amp;rsquo;t match me, I let go of the idea, shortly after that, I found my first project.&lt;/p&gt;
+
+&lt;h2 id=&#34;example-contributions:130150900c6183f60d99464c51348c02&#34;&gt;Example Contributions&lt;/h2&gt;
+
+&lt;p&gt;I am only going to cover the ways in which I contributed to Open Source software, while mentioning an example.&lt;/p&gt;
+
+&lt;h3 id=&#34;hashtwm:130150900c6183f60d99464c51348c02&#34;&gt;HashTWM&lt;/h3&gt;
+
+&lt;p&gt;At my last employer we were running Windows. Because I was spoiled by using &lt;a href=&#34;http://i3wm.org/&#34;&gt;i3&lt;/a&gt; at home, which increased my speed and productivity, I wanted to be as fast navigating around in Windows.&lt;/p&gt;
+
+&lt;p&gt;So it came, that I was looking for a tiling window manager for Windows.
+At GitHub I found &lt;a href=&#34;https://github.com/ZaneA/HashTWM&#34;&gt;HashTWM&lt;/a&gt;, and I think this was the project I tried to contribute to.&lt;/p&gt;
+
+&lt;p&gt;I remember being quite interested in understanding the code. My &lt;a href=&#34;https://github.com/ZaneA/HashTWM/commit/6f3af81cbe7964c4b01a3a8b6f059a5d3fdf294e&#34;&gt;first commit&lt;/a&gt; was to move the sourcecode to it&amp;rsquo;s own directory. And then created a VisualStudio project beside the existing Makefile. Both were received by the creator welcomly. Which encouraged me to look for more ways to help.&lt;/p&gt;
+
+&lt;p&gt;I made the project ANSI C compatible and fixed some small error which occured on newer versions of Windows because of the duplicate function called &lt;em&gt;RegisterShellHookWindowProc&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Funny enough I didn&amp;rsquo;t use HashTWM long; only considering it led to my first open source contribution without really looking for it.&lt;/p&gt;
+
+&lt;h3 id=&#34;diaspora-webclient:130150900c6183f60d99464c51348c02&#34;&gt;Diaspora Webclient&lt;/h3&gt;
+
+&lt;p&gt;While checking out mobile applications for &lt;a href=&#34;https://diasporafoundation.org/&#34;&gt;Diaspora&lt;/a&gt; I came across &lt;a href=&#34;https://github.com/voidcode/Diaspora-Webclient&#34;&gt;Diaspora-Webclient&lt;/a&gt; on &lt;a href=&#34;https://f-droid.org/repository/browse/?fdid=com.voidcode.diasporawebclient&#34;&gt;F-Droid &lt;/a&gt;. Right after starting the app, there was welcome message displayed. And there was a typo in it. Of course Mr. Perfectionista couldn&amp;rsquo;t endure that. So I pulled the source, corrected the typo and &lt;a href=&#34;https://github.com/voidcode/Diaspora-Webclient/commit/1bd1175a9bfd6c0d8d63ed7960db92b5f9f3c984&#34;&gt;pushed my change&lt;/a&gt;. I know it&amp;rsquo;s nothing fancy, but still it&amp;rsquo;s increases the overall value of the product. At least I tend to think so..&lt;/p&gt;
+
+&lt;h3 id=&#34;vimperator-colors:130150900c6183f60d99464c51348c02&#34;&gt;Vimperator Colors&lt;/h3&gt;
+
+&lt;p&gt;Like a lot computer folks, I enjoy using &lt;strong&gt;vim&lt;/strong&gt;, and like the sometimes overly-enthusiastic person I am, I wanted to vimify &lt;strong&gt;everything&lt;/strong&gt;. To have Firefox understand the vi-keybindings I installed the &lt;a href=&#34;https://addons.mozilla.org/de/firefox/addon/vimperator/&#34;&gt;Vimperator plugin&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Browsing without taking my hands of the keyboard. I was really happy.&lt;/p&gt;
+
+&lt;p&gt;The only thing, that managed to impair my joy was the not-so-pretty standard color theme. No problem, let&amp;rsquo;s find some on google!
+Quite strange was, that the &lt;a href=&#34;https://github.com/vimpr/vimperator-colors&#34;&gt;main color theme repository&lt;/a&gt; contained merely &lt;em&gt;one&lt;/em&gt; theme! On google I found some more, some worked, some did not. So I made them work and put my fresh collection &lt;a href=&#34;https://github.com/jubalh/vimperator-colors&#34;&gt;repository&lt;/a&gt; on GitHub. It was a little better than having them scattered around the web, but for others to easily find them I made pull request to the main repository. I did wait for some time, because I was not sure if it really was the official repo, but the guys on IRC told me it was the right one.
+Although it took &lt;em&gt;one year and a half&lt;/em&gt; until the owners &lt;a href=&#34;https://github.com/vimpr/vimperator-colors/pull/1&#34;&gt;saw my pull request&lt;/a&gt; and accepted it, I helped to expand the color theme collection from 1 to 13.&lt;/p&gt;
+
+&lt;h3 id=&#34;vifm:130150900c6183f60d99464c51348c02&#34;&gt;Vifm&lt;/h3&gt;
+
+&lt;p&gt;Still on the course to use my freshly learned vi-keybindings everywhere I came to use &lt;a href=&#34;http://vifm.info/&#34;&gt;vifm file explorer&lt;/a&gt;.
+Regarding color themes, it was the same situation like with vimperator. So I created a &lt;a href=&#34;https://github.com/vifm/vifm-colors&#34;&gt;GitHub repo&lt;/a&gt; to share my collection of themes. I collected 7 stars and got 2 people to watch my repo, which was something new and exciting for me. After some time the &lt;a href=&#34;https://github.com/vifm&#34;&gt;vifm organisation&lt;/a&gt; was created, and the vifm source repository was moved from ksteen to the organisation. Due to the creation of the organisation I got an email from the maintainer and main developer of vifm, asking me whether I wanted to transfer my repo containing the collections to the vifm organisation. Of course I wanted to!&lt;/p&gt;
+
+&lt;p&gt;While porting vim color themes to vifm, I realized that vifm only supports 8-Bit colors.
+I emailed the author and when he politely replied that he will include more color support, I offered to do it myself, to get some experience. He agreed and encouraged me to do so. So it came &lt;a href=&#34;https://github.com/vifm/vifm/pull/43/commits&#34;&gt;I made vifm support 256 color names&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Later I made a minor contribution by &lt;a href=&#34;https://github.com/vifm/vifm/pull/46&#34;&gt;removing trailing whitespaces&lt;/a&gt;, which is a bad habit of mine. I just can&amp;rsquo;t stand them&amp;hellip; ;-)&lt;/p&gt;
+
+&lt;h3 id=&#34;jessy:130150900c6183f60d99464c51348c02&#34;&gt;Jessy&lt;/h3&gt;
+
+&lt;p&gt;At Uni we had to learn Java. However the exercises didn&amp;rsquo;t really catch my attention. So to understand all the concepts I thought about creating a &lt;a href=&#34;https://github.com/jubalh/jessy&#34;&gt;project of my own&lt;/a&gt;.
+Because I was playing chess at this time, I wanted to create a little chess game. Actually just the representation of a board, containing figures. Nothing else. No move checking, no KI, man.. at first I didn&amp;rsquo;t plan to give the possibillity to move at all. Just a representation of the board.
+I had so much fun with this project. Probably I will create a post of it&amp;rsquo;s own for it.&lt;/p&gt;
+
+&lt;p&gt;Anyway, at some point I came to use a chess engine, called &lt;a href=&#34;http://fluxchess.com/&#34;&gt;Flux&lt;/a&gt;, through including it in my project I came to &lt;a href=&#34;https://github.com/fluxroot/flux/pull/79&#34;&gt;fix a small error&lt;/a&gt; in the project setup.&lt;/p&gt;
+
+&lt;p&gt;Through Jessy I learned a lot, at some point two people joined the team and contributed to it. I learned how to manage and coordinate a project over the internet and to use GitHub properly. And I found a mentor who was an experienced Java developer who checked my code.&lt;/p&gt;
+
+&lt;h3 id=&#34;homebrew:130150900c6183f60d99464c51348c02&#34;&gt;Homebrew&lt;/h3&gt;
+
+&lt;p&gt;After Jessy, I wanted to learn more about Java, and because I was interested in web development for some time, I looked at different frameworks.&lt;/p&gt;
+
+&lt;p&gt;I came across the &lt;a href=&#34;https://www.playframework.com/&#34;&gt;Play Framework&lt;/a&gt; and looking for a quick way to install it, &lt;code&gt;brew search&lt;/code&gt;ed it.
+The Tutorial used version 2.3 of Play, which was newer than what Homebrew provided, so I intended to update the formula.&lt;/p&gt;
+
+&lt;p&gt;Because Play switched to Typesafe-Activator it &lt;a href=&#34;https://github.com/Homebrew/homebrew/pull/30262&#34;&gt;turned out&lt;/a&gt; that there was a formula containing Activator and thus Play.
+Someone pointed out that version 2.2 of Play was still in heavy used and so it came, I &lt;a href=&#34;https://github.com/jubalh/homebrew/commit/67f8919f11b0e7ca5b8987876aa750ceabdf2d4f&#34;&gt;added an caveat&lt;/a&gt; but then &lt;a href=&#34;https://github.com/jubalh/homebrew/commit/19413541411e58759faadde24138c789d80ee944&#34;&gt;removed Play altogether&lt;/a&gt; and &lt;a href=&#34;https://github.com/Homebrew/homebrew-versions/pull/462&#34;&gt;added it to homebrew-versions&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;reading-code:130150900c6183f60d99464c51348c02&#34;&gt;Reading code&lt;/h2&gt;
+
+&lt;p&gt;Generally I think reading code of others is a good thing to do. Sometimes you can learn a lot from it, and it trains you to understand different styles and easily comprehend what&amp;rsquo;s going on. Though I have to say, most of the time it&amp;rsquo;s hard for me ;-) Understanding comes slowly, but that is okay for now.&lt;/p&gt;
+
+&lt;p&gt;So whenever I came across something interesting, or read about new open source software on &lt;a href=&#34;https://news.ycombinator.com/&#34;&gt;Hacker News&lt;/a&gt; and had some free time (or not) I checked out the code and sometimes I was able to make some minor improvements. Mostly making the coding style consistent or hunting whitespaces while reading the code.&lt;/p&gt;
+
+&lt;p&gt;In such ways I contributed to &lt;a href=&#34;https://github.com/shaih/HElib&#34;&gt;HElib&lt;/a&gt;, a library that implements homomorphic encryption, the Telegram &lt;a href=&#34;https://github.com/telegramdesktop/tdesktop&#34;&gt;desktop&lt;/a&gt; and &lt;a href=&#34;https://github.com/vysheng/tg&#34;&gt;console&lt;/a&gt; clients, and the &lt;a href=&#34;https://code.launchpad.net/~ubuntu-terminal-dev/ubuntu-terminal-app/plugin&#34;&gt;ubuntu-terminal-app-plugin&lt;/a&gt; used by &lt;a href=&#34;https://github.com/Swordifish90/cool-old-term&#34;&gt;cool-old-term&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;When I came across cool-old-term I wrote a post entitled &lt;a href=&#34;{% post_url 2014-07-30-launchpad %}&#34;&gt;Canonical Launchpad&lt;/a&gt;. Check it out to read more about my contribution.&lt;/p&gt;
+
+&lt;h1 id=&#34;ways-to-contribute:130150900c6183f60d99464c51348c02&#34;&gt;Ways to contribute&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;I used something and came across an error/something unclear as a user: &lt;em&gt;Diaspora-Webclient, Homebrew&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;I used something and wanted to improve it: &lt;em&gt;vifm&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;I created something: &lt;em&gt;Jessy&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;I read code and found a mistake/inconsistent style: &lt;em&gt;HELib, cool-old-term, telegram console, telegram desktop, vifm&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;I wrote software and use third party libraries, but came across an error: &lt;em&gt;Flux&lt;/em&gt;&lt;/li&gt;
+&lt;li&gt;Creating color themes/artwork: &lt;em&gt;vifm, Vimperator&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&#34;fazit:130150900c6183f60d99464c51348c02&#34;&gt;Fazit&lt;/h1&gt;
+
+&lt;p&gt;I am aware that most of my contributions were only of a minor nature. Anyway I learned something from every single one of them. And in my eyes every little improvement is an improvement still.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Canonical Launchpad</title>
+      <link>http://jubalh.github.io/blog/post/2014-07-30-launchpad/</link>
+      <pubDate>Wed, 30 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://jubalh.github.io/blog/post/2014-07-30-launchpad/</guid>
+      <description>
+
+&lt;p&gt;Through a &lt;a href=&#34;https://twitter.com/nixcraft/statuses/494081428661870593&#34;&gt;tweet&lt;/a&gt;, I stumbled upon &lt;a href=&#34;https://github.com/Swordifish90/cool-old-term&#34;&gt;cool-old-term&lt;/a&gt;, a terminal emulator with the looks of an old cathode tube screen realized with QML.
+It was a funny idea and because I wrote a small QML Hello World example once, but didn&amp;rsquo;t dig deeper into QML,I decided to check out the sourcecode and give it a look.&lt;/p&gt;
+
+&lt;p&gt;But again, I didnt&amp;rsquo;t spent much time reading the QML but rather looked at the C++ terminal plugin behind cool-old-term.&lt;/p&gt;
+
+&lt;p&gt;My vim is configured to display spaces and tabs, and because of this I found some of them at unnecessary places. I fixed them out of perfectionism (yeah I know, I am a great guy), and went on to submit my changes.&lt;/p&gt;
+
+&lt;p&gt;So it came, that I used &lt;a href=&#34;http://bazaar.canonical.com/en/&#34;&gt;Bazaar&lt;/a&gt; for the first time, registered at &lt;a href=&#34;https://launchpad.net/&#34;&gt;Launchpad&lt;/a&gt; and made my first contribution on that platform.&lt;/p&gt;
+
+&lt;h1 id=&#34;terminology:e4b86f8f071132acd15659476e92ecef&#34;&gt;Terminology&lt;/h1&gt;
+
+&lt;p&gt;Bazaar is a version control system which is sponsored by Canonical. It&amp;rsquo;s similiar to git in the way that it&amp;rsquo;s also distributed and doesn&amp;rsquo;t use a central server like for example SVN.&lt;/p&gt;
+
+&lt;p&gt;Launchpad is a platform to host sourcecode, report bugs and generally administer open source projects, similar to GitHub or Sourceforge. Like Bazaar it&amp;rsquo;s maintained by Canonical and thus heavily used in the development of Ubuntu Linux related software.&lt;/p&gt;
+
+&lt;h1 id=&#34;making-the-change:e4b86f8f071132acd15659476e92ecef&#34;&gt;Making the change&lt;/h1&gt;
+
+&lt;p&gt;I just intend to read the code not compile it, so I stay on OSX and install Bazaar via Homebrew.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  brew install bzr
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Since I know nothing more about Bazaar other than what it is and some of it&amp;rsquo;s differences and similarities related to git. I read a the basic introduction &lt;a href=&#34;http://doc.bazaar.canonical.com/latest/en/mini-tutorial/&#34;&gt;Bazaar in five minutes&lt;/a&gt; to learn the most basic commands.&lt;/p&gt;
+
+&lt;p&gt;This was already enough to get me started, so I set my username and checked out the ubuntu-terminal-app.
+Like on GitHub you need to register an ssh key on Launchpad, which I copy using the last of the following lines.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd ~/src/ubuntu-terminal-app
+$ bzr branch https://launchpad.net/ubuntu-terminal-app
+Not checking SSL certificate for launchpad.net.
+Branched 101 revisions.
+
+$ bzr whoami &amp;quot;Michael Vetter &amp;lt;g.bluehut@gmail.com&amp;gt;&amp;quot;
+$ bzr launchpad-login g-bluehut
+$ cat ~/.ssh/id_rsa.pub | pbcopy
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now I &lt;a href=&#34;https://launchpad.net/people/+me/+editsshkeys&#34;&gt;paste them to my profile&lt;/a&gt; and am ready to make my changes.
+Adding and commiting files is similar like with git:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ bzr add
+
+$ bzr commit
+Committing to: /Users/michael/src/bzr2/ub-kn/bluehut/
+modified src/plugin/konsole/Character.h
+modified src/plugin/konsole/ColorScheme.cpp
+modified src/plugin/konsole/Vt102Emulation.cpp
+...
+modified src/plugin/konsole/ksession.h
+Committed revision 102.
+
+$ bzr push lp:~/g-bluehut/ubuntu-terminal-app/whitespacefix/
+bzr: ERROR: Permission denied: &amp;quot;~g-bluehut/g-bluehut/ubuntu-terminal-app/whitespacefix/&amp;quot;:
+: Cannot create branch at &#39;/~g-bluehut/g-bluehut/ubuntu-terminal-app/whitespacefix&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;At first I got confused why I didn&amp;rsquo;t have permission to push to my repo and looked for different causes, reading the line again I saw that I wasted the time because of an typo&amp;hellip;
+The first slash on the line was evildoer. The good thing was, while looking for my mistake I learned that I can abbreviate my last command to &lt;code&gt;$ bzr push:~/ubuntu-terminal-app/whitespacefix&lt;/code&gt; because Bazaar knows my username already.&lt;/p&gt;
+
+&lt;p&gt;My branch is now publicly available on Launchpad, so I &lt;a href=&#34;https://code.launchpad.net/~g-bluehut/ubuntu-terminal-app/whitespacefix&#34;&gt;navigate to it&lt;/a&gt; and click on &lt;em&gt;Propose for merging&lt;/em&gt; choose the branch to merge into, which in my case is &lt;em&gt;lp:ubuntu-terminal-app&lt;/em&gt;, I don&amp;rsquo;t provide a description because I assume the commit message is meaningful enough for this small change and click on &lt;em&gt;propose merge&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;The change is now &lt;a href=&#34;https://code.launchpad.net/~g-bluehut/ubuntu-terminal-app/whitespacefix/+merge/228807&#34;&gt;pending for review&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://jubalh.github.io/blog/images/ubuntu-terminal-app-review-large.png&#34;&gt;
+&lt;img src=&#34;http://jubalh.github.io/blog/images/ubuntu-terminal-app-review-large.png&#34; alt=&#34;Pending for review&#34; style=&#34;width: 734px;&#34;/&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&#34;the-end:e4b86f8f071132acd15659476e92ecef&#34;&gt;The end&lt;/h1&gt;
+
+&lt;p&gt;At first Launchpad seemed quite confusing to me, and even though it got better after some time of using it I still think GitHub is much more clear and easier to use.&lt;/p&gt;
+
+&lt;p&gt;After committing my change I read some pages which I found during my journey. Thanks again slash-typo!&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://packaging.ubuntu.com/html/patches-to-packages.html&#34;&gt;Patches to Packages&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://packaging.ubuntu.com/html/fixing-a-bug.html&#34;&gt;Fixing a bug&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://doc.bazaar.canonical.com/migration/en/survival/bzr-for-git-users.html&#34;&gt;Bazaar for git users&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Hear the symfony</title>
+      <link>http://jubalh.github.io/blog/post/2014-07-16-symfony/</link>
+      <pubDate>Wed, 16 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://jubalh.github.io/blog/post/2014-07-16-symfony/</guid>
+      <description>&lt;p&gt;When I moved here to start going to university, I searched for interesting companies to work for. One of them stated on their website that they use the &lt;a href=&#34;http://symfony.com/&#34;&gt;symfony2&lt;/a&gt; PHP framework.&amp;rdquo;
+I have never done much in the web area, but have always been interested in getting started. Because I was totally in exam period I rather should have studied, but decided to give symfony a quick look.&lt;/p&gt;
+
+&lt;p&gt;Somfonys website is excellent. A lot of information, and very clearly presented.
+Nevertheless it took my some time to set it up, mainly because I never did it before nor played with PHP.&lt;/p&gt;
+
+&lt;p&gt;To get an overview I followed their guide &lt;a href=&#34;http://symfony.com/doc/current/quick_tour/the_big_picture.html&#34;&gt;The Big picture&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;You should also now that I did all this on OSX.&lt;/p&gt;
+
+&lt;p&gt;First thing is to install symphony via &lt;a href=&#34;https://getcomposer.org/&#34;&gt;composer&lt;/a&gt;, a PHP dependency management tool. For some reason it was already installed on my computer, but I don&amp;rsquo;t know if I played with PHP before and installed computer on the way or if it ships with OSX be default. I assume that I installed it myself and forgot about it though.&lt;/p&gt;
+
+&lt;p&gt;Installing composor isn&amp;rsquo;t difficult at all on OSX you can do it via homebrew:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  brew update     
+  brew tap homebrew/homebrew-php     
+  brew tap homebrew/dupes     
+  brew tap homebrew/versions
+  brew install php55-intl
+  brew install homebrew/php/composer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And for other operating systems you can just follow their &lt;a href=&#34;https://getcomposer.org/doc/00-intro.md#installation-nix&#34;&gt;installation instructions&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Unfortunately installing symfony itself, was the first thing that didn&amp;rsquo;t work.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  $: composer create-project symfony/framework-standard-edition myproject/ 2.5`
+  
+  Installing symfony/framework-standard-edition (v2.5.0)
+    - Installing symfony/framework-standard-edition (v2.5.0)
+        Loading from cache
+
+        Created project in myproject/
+        Loading composer repositories with package information
+        Installing dependencies (including require-dev)
+  
+  Fatal error: Allowed memory size of 536870912 bytes exhausted (tried to allocate 32 bytes)
+  in phar:///usr/local/Cellar/composer/1.0.0-alpha8/libexec/composer.phar/src/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Seems like something is running out of memory, but why? It isn&amp;rsquo;t that much after all.
+After some investigating it seemed like Composer was running out of memory when trying to build the dependency tree. And that I can configure how much memory it has at it&amp;rsquo;s disposal in the PHP config.&lt;/p&gt;
+
+&lt;p&gt;In /usr/local/etc/php/5.5/php.ini I looked for &lt;em&gt;memory_limit&lt;/em&gt; and changed it&amp;rsquo;s value to &lt;em&gt;-1&lt;/em&gt; for unlimited. Since this is my private machine used for development this should be okay.&lt;/p&gt;
+
+&lt;p&gt;No luck.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ php -i | grep ini
+Configuration File (php.ini) Path =&amp;gt; /etc
+
+$ php -i | grep Loaded Configuration
+Loaded Configuration File = (none)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Aha! PHP thought my ini is in &lt;code&gt;/etc/&lt;/code&gt; when I really edited the one in &lt;code&gt;/usr/local/etc/php/5.5/php.ini&lt;/code&gt;. However when looking into the directory I saw that there was a template file, which I decided to edit instead.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ cp /etc/php.ini.default /etc/php.ini
+$ su vim /etc/php.ini
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Making the same change in this file and saving it I eliminated the error, but got a new one in return.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ composer create-project symfony/framework-standard-edition myproject/ ~2.5
+
+[Symfony\Component\Debug\Exception\ContextErrorException]
+ Warning: date_default_timezone_get(): It is not safe to rely on the system&#39;s timezone settings.
+ You are *required* to use the date.timezone setting or the date_default_timezone_set() function.
+ In case you used any of those methods and you are still getting this warning, you most likely
+ misspelled the timezone identifier. We selected the timezone &#39;UTC&#39; for now, 
+ but please set date.timezone to select your timezone. in 
+ /Users/alguen/src/symfonytest/myproject/vendor/monolog/monolog/src/Monolog/Logger.php line 233
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The message continued with several other errors, but one step at a time, right?
+When looking for &lt;em&gt;timezone&lt;/em&gt; in my PHP.ini I found&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[Date]
+; Defines the default timezone used by the date functions
+; http://php.net/date.timezone
+;date.timezone =
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So there was one more mistake to fix, the line was commented out.
+Checking &lt;a href=&#34;http://php.net/date.timezone&#34;&gt;http://php.net/date.timezone&lt;/a&gt; for the correct syntax, I used: &lt;code&gt;date.timezone = &amp;quot;Europe/Berlin&amp;quot;&lt;/code&gt; ran the installation command again and: it worked!&lt;/p&gt;
+
+&lt;p&gt;After this the tutorial was a breeze, and gave me a nice overview of symfony.
+Being my first time engaging in web development stuff, I also enjoyed the chapter &lt;a href=&#34;http://symfony.com/doc/current/book/http_fundamentals.html&#34;&gt;HTTP Fundamentals&lt;/a&gt; in their online &lt;a href=&#34;http://symfony.com/doc/current/book/index.html&#34;&gt;symfony book&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Actually, let&amp;rsquo;s just work through that now too.
+What? Exams in two days? Oh well&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;I know my priorities.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>In A Galaxy Far, Far Away</title>
+      <link>http://jubalh.github.io/blog/post/2014-05-03-intro/</link>
+      <pubDate>Sat, 03 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://jubalh.github.io/blog/post/2014-05-03-intro/</guid>
+      <description>
+
+&lt;h2 id=&#34;in-a-galaxy-far-far-away:87f03697e63db30265d009426bc0037e&#34;&gt;In A Galaxy Far, Far Away&lt;/h2&gt;
+
+&lt;p&gt;or, how everything started&lt;/p&gt;
+
+&lt;p&gt;In this first Post I would like to tell you how my journey into the world of computers began.&lt;/p&gt;
+
+&lt;p&gt;I think I was something between 10 to 12 years old when I watched the older brother of a friend playing a text based computer game in fullscreen console on Windows 95.&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Why do you play a game like that? Why not play one which has graphics?&amp;rdquo; - &amp;ldquo;Because we wrote this game ourselves&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Wrote?&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;So it came that one week later my friend brought a floppy to class with the words: &amp;ldquo;Here you have it. The game my bro wrote with his friends&amp;rdquo;.
+I couldn&amp;rsquo;t await it even more than usual to get home.&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Well, this looks kind of different than it looked at his computer. Maybe he got me the wrong file?&amp;rdquo; These were the first thoughts that came to me when opening &lt;em&gt;schulsim.bas&lt;/em&gt;.
+But at the same time the text was strangely familiar, just those additional strange english words (I&amp;rsquo;m a native German) surprised and confused me.&lt;/p&gt;
+
+&lt;p&gt;Whatever. Let&amp;rsquo;s play! So I started playing the game, read: typed &lt;em&gt;a&lt;/em&gt;, &lt;em&gt;b&lt;/em&gt;, or &lt;em&gt;c&lt;/em&gt; depending if I wanted to go into the classroom, the hallway or the principals office. Of course I chose option &lt;em&gt;b&lt;/em&gt;, the hallway.
+Strange. Nothing happened. But I could read the next scenario anyways, so I just scrolled down and decided to try to pick a locker. Unfortunately I had no luck, and why is this game so different than what I saw last week? I have to scroll down myself, the text looks grey on blue instead of just white on black, there is no interaction, and all those weird english words everywhere.&lt;/p&gt;
+
+&lt;p&gt;After playing a while like this (I surely enjoyed myself, but enough is enough), I decided that eating is much better than playing. So when I wanted to close the program I realized the menu bar at the top, especially one item: &lt;em&gt;execute&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;I clicked on it, and a little window with weird messages pops up. I realized it were errors and they pointed at the lines I edited. All my yesses and noes, my a, b, c and d&amp;rsquo;s.
+What was his problem with those? He didn&amp;rsquo;t do anything anyway, so why complain now?&lt;/p&gt;
+
+&lt;p&gt;I removed all of them and clicked again on &lt;em&gt;execute&lt;/em&gt;, suddenly the screen turned to white color on black background.&lt;/p&gt;
+
+&lt;p&gt;Now, before you think I must have been a total retard keep in mind that there was no Internet at that time (not for me), nobody in my family used a computer, and thus nobody ever told me how computer programs worked, I had no concept of compilers nor interpreters nor anything. I was just a kid discovering how to program all by itself. I continued to alter the code and hit execute and slowly learned what &lt;em&gt;if&lt;/em&gt;, &lt;em&gt;goto&lt;/em&gt;, and &lt;em&gt;$NAME&lt;/em&gt; did and were, by try and error, by comparing my change to the change of program behaviour. The help menu of QBasic was not of much use to me since it was in english, and my english skills were limited to &lt;em&gt;apple&lt;/em&gt; and &lt;em&gt;ruler&lt;/em&gt; at that time.&lt;/p&gt;
+
+&lt;p&gt;This is how I started my journey into the world of programming. I had a lot of fun, and felt like discovering a whole new world, of which noone ever told me before.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

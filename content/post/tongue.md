@@ -34,3 +34,10 @@ gd
 gofix
 gocover
 golint
+
+release rest-reminder post first. and link to it for same possiblities with notifdy-send etc.
+
+conky
+TEXT
+${execi 5 tongue show}
+

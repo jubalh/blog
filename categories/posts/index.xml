@@ -6,8 +6,152 @@
     <description>Recent content in Posts on jubalh&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 13 Dec 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 29 Apr 2015 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://jubalh.github.io/blog/categories/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>tongue</title>
+      <link>http://jubalh.github.io/blog/post/2015-05-29-tongue/</link>
+      <pubDate>Wed, 29 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://jubalh.github.io/blog/post/2015-05-29-tongue/</guid>
+      <description>
+
+&lt;p&gt;I wanted to learn Go. But as everybody knows, I need do use something to learn how to use it.
+After a while reading articles and watching talks about Go I started to think about what I could do, and what I did, was creating (a) tongue.&lt;/p&gt;
+
+&lt;p&gt;I like learning languages, yeah, human languages that is. Unfortunately I am not able to speak any single one except my native language to a good level but I like it anyways. You can&amp;rsquo;t be good at everything you know?&lt;/p&gt;
+
+&lt;p&gt;When creating tongue, I wanted it to be as simple as possible. It should be easy to use it with other programs. Meaning it should just store and retrieve my vocabulary, but I might use different things to display them. Maybe I would like to interact directly with tongue on the command line, but chances are good I will also want to use it to display my &amp;ldquo;vocabulary of the hour&amp;rdquo; via conky. Or use the notifcation-daemon to display a foreign word to me.&lt;/p&gt;
+
+&lt;p&gt;Long story short, I tried to adhere to the UNIX philosophy, of doing just one task, and doing it well.&lt;/p&gt;
+
+&lt;p&gt;Okay I am not so sure about the latter, but i will try my best.&lt;/p&gt;
+
+&lt;h1 id=&#34;development:1de7bbffa5ebe2d1e9f74fd770263431&#34;&gt;Development&lt;/h1&gt;
+
+&lt;p&gt;I love Go because it let&amp;rsquo;s me stay on the command line all day long. I used vim with the vim-go plugin to write my code. The experience was awesome.
+Go is such a simple and clean language that vim is perfectly capable of handling it without any heavy customization. At work I am coding in PHP using the Symfony2 Framework, and at first I tried to do it with vim. But at some point a collegue made me try out PHPStrom, and I have to say it&amp;rsquo;s good. There is even a vim plugin which makes things much more comfortable. So it&amp;rsquo;s a good trade-off.&lt;/p&gt;
+
+&lt;p&gt;The beautiy about Go is, that you don&amp;rsquo;t need a heavy IDE. &lt;em&gt;Everything&lt;/em&gt; works great with vim.&lt;/p&gt;
+
+&lt;p&gt;Usually I opened a terminal, started tmux, created two panels with vim on top and a shell below. I coded in vim, switched to the pane below and built and tested my program.&lt;/p&gt;
+
+&lt;p&gt;Go and vim-go come with some nice tools that help you with your code, namely:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;go fmt&lt;/li&gt;
+&lt;li&gt;go vet&lt;/li&gt;
+&lt;li&gt;go imports&lt;/li&gt;
+&lt;li&gt;go cover&lt;/li&gt;
+&lt;li&gt;go lint&lt;/li&gt;
+&lt;li&gt;go fix&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If I was unaware how a function from the standard libarary or from 3rd parties worked, I could just press &lt;em&gt;gd&lt;/em&gt; to jump to the definition.
+Those tools and simple vim was all the IDE-like features I needed. It was all there. Great.&lt;/p&gt;
+
+&lt;p&gt;release rest-reminder post first. and link to it for same possiblities with notifdy-send etc.&lt;/p&gt;
+
+&lt;h1 id=&#34;usage:1de7bbffa5ebe2d1e9f74fd770263431&#34;&gt;Usage&lt;/h1&gt;
+
+&lt;p&gt;My main reason for creating &lt;em&gt;tongue&lt;/em&gt; was to learn Go. But now I find myself using it &lt;strong&gt;a lot&lt;/strong&gt;.
+Whenever I stumble upon a new word a go right into my Terminal and add it to my databse:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ tongue add Hallo Merhaba
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Because I am so proud of my ever growing list of words, I just type this from time to time to get excited:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ tongue --verbose l
+You have 10 entries in your database:
+1: Hallo - Merhaba
+2: schön - güzel
+3: Blume - çiçek
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;em&gt;&amp;ndash;verbose&lt;/em&gt; flag makes tongue output additional information like in this case &lt;em&gt;You have 1 entries in your database&lt;/em&gt;.
+It should be used when you interact with it on the commandline directly. If you want to process the information with another program or script you shouldn&amp;rsquo;t use this flag. Your output will be easier to parse then.&lt;/p&gt;
+
+&lt;p&gt;Sometimes I mistype so I have to delete a word again:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ tongue add Afe maymun
+
+$ tongue delete Afe
+
+$ tongue add Affe maymun
+
+$ tongue list
+1: Hallo - Merhaba
+2: Affe - maymun
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When I am totally confused and don&amp;rsquo;t know how to use tongue anymore there is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ tongue --help
+tongue - a cli vocabulary manager
+
+USAGE:
+tongue [global options] command [command options] [arguments...]
+
+VERSION:
+0.0.1
+
+AUTHOR(S):
+Michael Vetter &amp;lt;g.bluehut@gmail.com&amp;gt;
+
+COMMANDS:
+add, a		add a new entry to the database. First argument is native, second is foreign word.
+delete, d	delete entry from the database. Argument is the native word. Only the first occurance will be deleted.
+list, l		list all entries
+show, s		display an entry
+help, h		Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+--no-native					don&#39;t display native word
+--no-foreign				don&#39;t display foreign word
+--file &amp;quot;collection.json&amp;quot;	specify JSON file
+--verbose, -m				display (more) additional messages
+--help, -h					show help
+--version, -v				print the version
+
+$ tongue show --help
+NAME:
+show - display an entry
+
+USAGE:
+command show [command options] [arguments...]
+
+OPTIONS:
+--index, -i &amp;quot;0&amp;quot;	display entry with index &#39;index&#39;
+--native, -n	display entry where native word is &#39;native&#39;
+--foreign, -f	display entry where foreign word is &#39;foreign&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Another nice feature is that you can configure &lt;a href=&#34;http://conky.sourceforge.net/&#34;&gt;conky&lt;/a&gt; to display a new random word combination every X minutes, just by adding the following line to you &lt;em&gt;.conkyrc&lt;/em&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;${execi 5 tongue show}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;It is probably a good idea to use the global &lt;em&gt;&amp;ndash;no-native&lt;/em&gt; flag to display the foreign word only in your conky. So you can think first, see if you can come up with the native word yourself and if not just run &lt;code&gt;tongue show --foreign Merhaba&lt;/code&gt; to see the word.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ tongue --no-native show
+Merhaba
+
+$ tongue show --foreign Merhaba
+Hallo
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In similar ways you can use &lt;em&gt;notify-send&lt;/em&gt; to get a message on your desktop every X minutes containing your vocabulary. This time I tell tongue to use my spanish database instead of the standard one:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;watch -n 10 &amp;quot;notify-send &#39;$(tongue show --file ~/spanish.json)&#39;&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You guessed right, tongue is available on &lt;a href=&#34;https://github.com/jubalh/tongue&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>LXQt development on Funtoo</title>

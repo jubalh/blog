@@ -1,0 +1,243 @@
+  <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>jubalh - jubalh&#39;s blog</title>
+		<meta name="viewport" content="width=device-width">
+
+		
+		<link rel="stylesheet" href="http://localhost:1313/blog//css/syntax.css">
+		
+		<link rel="stylesheet" href="http://localhost:1313/blog//css/main.css">
+		
+		<link rel="stylesheet" href="http://localhost:1313/blog//css/responsive.css">
+
+		
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:300,400,700' rel='stylesheet' type='text/css'>
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="jubalh&#39;s blog" />
+		
+		<script src="http://localhost:1313/blog//js/jquery.min.js"></script>
+	</head>
+
+  <body>
+    <div class="sidebar" id="sidebar">
+	<div class="header">
+		<h1 class="title"><a href="http://localhost:1313/blog/"><img id="logo" src="http://localhost:1313/blog//images/avatar.jpg"></a></h1>
+		<span class="tagline">jubalh's blog<br>a not so mental note</span>
+	</div>
+
+	<div class="posts">
+		<ul class="posts-list">
+
+
+<li class="post-link"><a class="post-title" href="http://localhost:1313/blog/post/tongue/">tongue<span class="post-date">Apr 29, 2015</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://localhost:1313/blog/post/linux_on_macbook/">Linux on Macbook<span class="post-date">Apr 15, 2015</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://localhost:1313/blog/post/2014-12-13-devlxqttoo/">LXQt development on Funtoo<span class="post-date">Dec 13, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://localhost:1313/blog/post/2014-09-04-changingflag/">Changing Flags<span class="post-date">Sep 4, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://localhost:1313/blog/post/2014-08-15-opensource/">Participate in open source<span class="post-date">Aug 15, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://localhost:1313/blog/post/2014-07-30-launchpad/">Canonical Launchpad<span class="post-date">Jul 30, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://localhost:1313/blog/post/2014-07-16-symfony/">Hear the symfony<span class="post-date">Jul 16, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://localhost:1313/blog/post/2014-05-03-intro/">In A Galaxy Far, Far Away<span class="post-date">May 3, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://localhost:1313/blog/post/openSUSE-packaging/"><span class="post-date">Jan 1, 0001</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://localhost:1313/blog/post/takingbreaks/"><span class="post-date">Jan 1, 0001</span></a></br></li>
+
+
+		</ul>
+	</div>
+	<div class="footer">
+		<span id="footer-links">
+			<a href="#" class="footer-link">About</a> <span class="separator">&bull;</span>
+			<a href="https://github.com/jubalh" class="footer-link">GitHub</a>
+		</span>
+	</div>
+</div>
+
+    <div class="content-wrapper">
+			<div id="cover-photo-container">
+				<img id="cover-photo" src="http://localhost:1313/blog/images/cover.jpg ">
+			</div>
+      <div class="content-wrapper__inner">
+        <div class="post">
+          <h1>tongue</h1>
+          <span class="post-date">Wed, Apr 29, 2015</span>
+          
+
+<p>I wanted to learn Go. But as everybody knows, I need do use something to learn how to use it.
+After a while reading articles and watching talks about Go I started to think about what I could do, and what I did, was creating (a) tongue.</p>
+
+<p>I like learning languages, yeah, human languages that is. Unfortunately I am not able to speak any single one except my native language to a good level but I like it anyways. You can&rsquo;t be good at everything you know?</p>
+
+<p>When creating tongue, I wanted it to be as simple as possible. It should be easy to use it with other programs. Meaning it should just store and retrieve my vocabulary, but I might use different things to display them. Maybe I would like to interact directly with tongue on the command line, but chances are good I will also want to use it to display my &ldquo;vocabulary of the hour&rdquo; via conky. Or use the notifcation-daemon to display a foreign word to me.</p>
+
+<p>Long story short, I tried to adhere to the UNIX philosophy, of doing just one task, and doing it well.</p>
+
+<p>Okay I am not so sure about the latter, but i will try my best.</p>
+
+<h1 id="development:054f1107e375ebfb1036d28cc44f750e">Development</h1>
+
+<p>I love Go because it let&rsquo;s me stay on the command line all day long. I used vim with the vim-go plugin to write my code. The experience was awesome.
+Go is such a simple and clean language that vim is perfectly capable of handling it without any heavy customization. At work I am coding in PHP using the Symfony2 Framework, and at first I tried to do it with vim. But at some point a collegue made me try out PHPStrom, and I have to say it&rsquo;s good. There is even a vim plugin which makes things much more comfortable. So it&rsquo;s a good trade-off.</p>
+
+<p>The beautiy about Go is, that you don&rsquo;t need a heavy IDE. <em>Everything</em> works great with vim.</p>
+
+<p>Usually I opened a terminal, started tmux, created two panels with vim on top and a shell below. I coded in vim, switched to the pane below and built and tested my program.</p>
+
+<p>Go and vim-go come with some nice tools that help you with your code, namely:</p>
+
+<ul>
+<li>go fmt</li>
+<li>go vet</li>
+<li>go imports</li>
+<li>go cover</li>
+<li>go lint</li>
+<li>go fix</li>
+</ul>
+
+<p>If I was unaware how a function from the standard libarary or from 3rd parties worked, I could just press <em>gd</em> to jump to the definition.
+Those tools and simple vim was all the IDE-like features I needed. It was all there. Great.</p>
+
+<p>release rest-reminder post first. and link to it for same possiblities with notifdy-send etc.</p>
+
+<h1 id="usage:054f1107e375ebfb1036d28cc44f750e">Usage</h1>
+
+<p>My main reason for creating <em>tongue</em> was to learn Go. But now I find myself using it <strong>a lot</strong>.
+Whenever I stumble upon a new word a go right into my Terminal and add it to my databse:</p>
+
+<pre><code>$ tongue add Hallo Merhaba
+</code></pre>
+
+<p>Because I am so proud of my ever growing list of words, I just type this from time to time to get excited:</p>
+
+<pre><code>$ tongue --verbose l
+You have 10 entries in your database:
+1: Hallo - Merhaba
+2: schön - güzel
+3: Blume - çiçek
+...
+</code></pre>
+
+<p>The <em>&ndash;verbose</em> flag makes tongue output additional information like in this case <em>You have 1 entries in your database</em>.
+It should be used when you interact with it on the commandline directly. If you want to process the information with another program or script you shouldn&rsquo;t use this flag. Your output will be easier to parse then.</p>
+
+<p>Sometimes I mistype so I have to delete a word again:</p>
+
+<pre><code>$ tongue add Afe maymun
+
+$ tongue delete Afe
+
+$ tongue add Affe maymun
+
+$ tongue list
+1: Hallo - Merhaba
+2: Affe - maymun
+</code></pre>
+
+<p>When I am totally confused and don&rsquo;t know how to use tongue anymore there is:</p>
+
+<pre><code>$ tongue --help
+tongue - a cli vocabulary manager
+
+USAGE:
+tongue [global options] command [command options] [arguments...]
+
+VERSION:
+0.0.1
+
+AUTHOR(S):
+Michael Vetter &lt;g.bluehut@gmail.com&gt;
+
+COMMANDS:
+add, a		add a new entry to the database. First argument is native, second is foreign word.
+delete, d	delete entry from the database. Argument is the native word. Only the first occurance will be deleted.
+list, l		list all entries
+show, s		display an entry
+help, h		Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+--no-native					don't display native word
+--no-foreign				don't display foreign word
+--file &quot;collection.json&quot;	specify JSON file
+--verbose, -m				display (more) additional messages
+--help, -h					show help
+--version, -v				print the version
+
+$ tongue show --help
+NAME:
+show - display an entry
+
+USAGE:
+command show [command options] [arguments...]
+
+OPTIONS:
+--index, -i &quot;0&quot;	display entry with index 'index'
+--native, -n	display entry where native word is 'native'
+--foreign, -f	display entry where foreign word is 'foreign'
+</code></pre>
+
+<p>Another nice feature is that you can configure <a href="http://conky.sourceforge.net/">conky</a> to display a new random word combination every X minutes, just by adding the following line to you <em>.conkyrc</em>:</p>
+
+<pre><code>${execi 5 tongue show}
+</code></pre>
+
+<p>It is probably a good idea to use the global <em>&ndash;no-native</em> flag to display the foreign word only in your conky. So you can think first, see if you can come up with the native word yourself and if not just run <code>tongue show --foreign Merhaba</code> to see the word.</p>
+
+<pre><code>$ tongue --no-native show
+Merhaba
+
+$ tongue show --foreign Merhaba
+Hallo
+
+</code></pre>
+
+<p>In similar ways you can use <em>notify-send</em> to get a message on your desktop every X minutes containing your vocabulary. This time I tell tongue to use my spanish database instead of the standard one:</p>
+
+<pre><code>watch -n 10 &quot;notify-send '$(tongue show --file ~/spanish.json)'&quot;
+</code></pre>
+
+<p>You guessed right, tongue is available on <a href="https://github.com/jubalh/tongue">GitHub</a>.</p>
+
+        </div>
+        <footer class="footer"><p>Composed with vim. Published on Wed, Apr 29, 2015 via Hugo.
+</br>© Michael Vetter</p></footer>
+
+        <section class="post-comments">
+
+
+</section>
+
+      </div>
+    </div>
+  </body>
+  
+</html>

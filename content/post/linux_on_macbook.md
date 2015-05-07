@@ -2,6 +2,7 @@
 title: "Linux on Macbook"
 date:   "2015-04-15"
 categories: "posts"
+draft: "true"
 
 ---
 

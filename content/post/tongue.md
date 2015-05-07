@@ -5,9 +5,7 @@ categories: "posts"
 
 ---
 
-# Preface #
-
-I wanted to learn go. But as everybody knows, I need do use something to learn how to use it.
+I wanted to learn Go. But as everybody knows, I need do use something to learn how to use it.
 After a while reading articles and watching talks about Go I started to think about what I could do, and what I did, was creating (a) tongue.
 
 I like learning languages, yeah, human languages that is. Unfortunately I am not able to speak any single one except my native language to a good level but I like it anyways. You can't be good at everything you know?
@@ -27,17 +25,106 @@ The beautiy about Go is, that you don't need a heavy IDE. *Everything* works gre
 
 Usually I opened a terminal, started tmux, created two panels with vim on top and a shell below. I coded in vim, switched to the pane below and built and tested my program.
 
-gofmt
-govet
-goimports
-gd
-gofix
-gocover
-golint
+Go and vim-go come with some nice tools that help you with your code, namely:
+
+- go fmt
+- go vet
+- go imports
+- go cover
+- go lint
+- go fix
+
+If I was unaware how a function from the standard libarary or from 3rd parties worked, I could just press *gd* to jump to the definition.
+Those tools and simple vim was all the IDE-like features I needed. It was all there. Great.
+
 
 release rest-reminder post first. and link to it for same possiblities with notifdy-send etc.
 
-conky
-TEXT
-${execi 5 tongue show}
+# Usage #
 
+My main reason for creating *tongue* was to learn Go. But now I find myself using it **a lot**.
+Whenever I stumble upon a new word a go right into my Terminal and add it to my databse:
+
+```
+$ tongue add Hallo Merhaba
+```
+
+Because I am so proud of my ever growing list of words, I just type this from time to time to get excited:
+
+```
+$ tongue --verbose l
+You have 10 entries in your database:
+1: Hallo - Merhaba
+2: schön - güzel
+3: Blume - çiçek
+...
+```
+
+The *--verbose* flag makes tongue output additional information like in this case *You have 1 entries in your database*.
+It should be used when you interact with it on the commandline directly. If you want to process the information with another program or script you shouldn't use this flag. Your output will be easier to parse then.
+
+Sometimes I have the foreign word swirling around in my head but I totally forgot the meaning of it.
+Tongue to the rescue:
+
+```
+$ tongue show --foreign Merhaba
+Hallo
+```
+
+If am totally confused and don't know how to use tongue anymore there is:
+
+```
+$ tongue --help
+tongue - a cli vocabulary manager
+
+USAGE:
+tongue [global options] command [command options] [arguments...]
+
+VERSION:
+0.0.1
+
+AUTHOR(S):
+Michael Vetter <g.bluehut@gmail.com>
+
+COMMANDS:
+add, a		add a new entry to the database. First argument is native, second is foreign word.
+delete, d	delete entry from the database. Argument is the native word. Only the first occurance will be deleted.
+list, l		list all entries
+show, s		display an entry
+help, h		Shows a list of commands or help for one command
+
+GLOBAL OPTIONS:
+--no-native					don't display native word
+--no-foreign				don't display foreign word
+--file "collection.json"	specify JSON file
+--verbose, -m				display (more) additional messages
+--help, -h					show help
+--version, -v				print the version
+
+$ tongue show --help
+NAME:
+show - display an entry
+
+USAGE:
+command show [command options] [arguments...]
+
+OPTIONS:
+--index, -i "0"	display entry with index 'index'
+--native, -n	display entry where native word is 'native'
+--foreign, -f	display entry where foreign word is 'foreign'
+```
+
+Another nice feature is that you can configure [conky](http://conky.sourceforge.net/) to display a new random word combination every X minutes, just by adding the following line to you *.conkyrc*:
+
+```
+${execi 5 tongue show}
+```
+
+It is probably a good idea to use the global *--no-native* flag to display the foreign word only. So you can think first, see if you can come up with the native word yourself and if not just run `tongue show --foreign Merhaba` to see the word.
+
+In similar ways you can use *notify-send* to get a message on your desktop every X minutes containing your vocabulary. This time I tell tongue to use my spanish database instead of the standard one:
+```
+watch -n 10 "notify-send '$(tongue show --file ~/spanish.json)'"
+```
+
+You guessed right, tongue is available on [GitHub](https://github.com/jubalh/tongue).

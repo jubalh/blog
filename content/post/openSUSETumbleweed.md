@@ -1,3 +1,11 @@
+---
+title: "funtoo overlay"
+date:   "2000-07-16"
+categories: "posts"
+draft: "true"
+
+---
+
 Sometimes problem libzypp is mising because during update something went wrong.
 correct that by:
 root@kallisti /home/michael # rpm -e --nodeps zypper

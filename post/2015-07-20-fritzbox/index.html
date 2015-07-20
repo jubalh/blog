@@ -1,0 +1,151 @@
+  <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>jubalh - jubalh&#39;s blog</title>
+		<meta name="viewport" content="width=device-width">
+
+		
+		<link rel="stylesheet" href="http://jubalh.github.io/blog/css/syntax.css">
+		
+		<link rel="stylesheet" href="http://jubalh.github.io/blog/css/main.css">
+		
+		<link rel="stylesheet" href="http://jubalh.github.io/blog/css/responsive.css">
+
+		
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway:300,400,700' rel='stylesheet' type='text/css'>
+
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="jubalh&#39;s blog" />
+		
+		<script src="http://jubalh.github.io/blog/js/jquery.min.js"></script>
+	</head>
+
+  <body>
+    <div class="sidebar" id="sidebar">
+	<div class="header">
+		<h1 class="title"><a href="http://jubalh.github.io/blog/"><img id="logo" src="http://jubalh.github.io/blog/images/avatar.jpg"></a></h1>
+		<span class="tagline">jubalh's blog<br>a not so mental note</span>
+	</div>
+
+	<div class="posts">
+		<ul class="posts-list">
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2015-07-20-fritzbox/">The Amazing Fritz!Box<span class="post-date">Jul 20, 2015</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2015-05-29-tongue/">tongue<span class="post-date">Apr 29, 2015</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-12-13-devlxqttoo/">LXQt development on Funtoo<span class="post-date">Dec 13, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-09-04-changingflag/">Changing Flags<span class="post-date">Sep 4, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-08-15-opensource/">Participate in open source<span class="post-date">Aug 15, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-07-30-launchpad/">Canonical Launchpad<span class="post-date">Jul 30, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-07-16-symfony/">Hear the symfony<span class="post-date">Jul 16, 2014</span></a></br></li>
+
+
+
+<li class="post-link"><a class="post-title" href="http://jubalh.github.io/blog/post/2014-05-03-intro/">In A Galaxy Far, Far Away<span class="post-date">May 3, 2014</span></a></br></li>
+
+
+		</ul>
+	</div>
+	<div class="footer">
+		<span id="footer-links">
+			<a href="#" class="footer-link">About</a> <span class="separator">&bull;</span>
+			<a href="https://github.com/jubalh" class="footer-link">GitHub</a>
+		</span>
+	</div>
+</div>
+
+    <div class="content-wrapper">
+			<div id="cover-photo-container">
+				<img id="cover-photo" src="http://jubalh.github.io/blog/images/cover.jpg ">
+			</div>
+      <div class="content-wrapper__inner">
+        <div class="post">
+          <h1>The Amazing Fritz!Box</h1>
+          <span class="post-date">Mon, Jul 20, 2015</span>
+          
+
+<p>The Fritz!Box is really a very usable device. And I am quite happy that it is pretty common and many people have it. Here I describe which features I especially like and use.</p>
+
+<h1 id="accessing-the-fritz-box:366ab485dd3ee4fd7ece30b75ac01d64">Accessing the Fritz!Box</h1>
+
+<p>The easiest way to configure it is probably accessing it via your browser, just navigate to either <em><a href="http://192.168.178.1/">http://192.168.178.1/</a></em> or <em><a href="http://fritz.box/">http://fritz.box/</a></em>. Sometimes I have not set up correctly DNS properly because I have a half-ass configured VPN running on one of my laptops and then I have to use the IP insteda of the domain name.</p>
+
+<h1 id="remote-login:366ab485dd3ee4fd7ece30b75ac01d64">Remote login</h1>
+
+<p>What&rsquo;s really handy is the feature to log into your box when you are actually not home, for this you either can use DynDNS where you need to register with a provider, some of which cost money. Or you can use AVM&rsquo;s own service called <a href="https://www.myfritz.net">MyFRITZ</a>.</p>
+
+<p>Just create a MyFRITZ account, then log into your box when you are home and navigate to:
+<em>Internet -&gt; MyFRITZ!</em> and click on <em>Add MyFRITZ! account</em>.</p>
+
+<p>Now you have to give your email adress and details on the MyFRITZ account.</p>
+
+<p>From now on your box will send its current IP adress to the MyFRITZ service and thus you can access this box via the domain name you got registered on your MyFRITZ account. You also could register several boxes there, for example if you adminster some for your friends or family.</p>
+
+<p>After this go into <em>System -&gt; FRITZ!Box-Benutzer</em> and click on <em>Add new user</em>. Fill in a name, E-Mail and password and most importantly check the box <em>Zugang auch aus dem Internet erlaubt</em>.</p>
+
+<p>If you type in the adress you got from the MyFRITZ then you will be forwarded to the FritzBox login and you need to log in via the user details you just set not with you MyFRITZ one! Also this user and password is only stored on your device and not on the external service. The external service is just to create a domain name to access your box.</p>
+
+<p>To view your domain name you need to have enabled: <em>Internet -&gt; Freigaben -&gt; FRITZ!Box-Dienste -&gt; Internetzugriff auf die FRITZ!Box über HTTPS aktiviert</em> and then take a lookt at <em>Internetadresse Ihrer FRITZ!Box</em>.</p>
+
+<h1 id="voip-phone:366ab485dd3ee4fd7ece30b75ac01d64">VOIP Phone</h1>
+
+<p>Click on <em>Telefonie -&gt; Telefoniegeräte</em> and then on <em>Neues Gerät einrichten</em>.
+Choose <em>Telefon (mit und ohne Anrufbeantworter)</em> and then most importantly <em>LAN/WLAN (IP-Telefon)</em> the rest is just which numbers to use and whats the internal number is going to be.</p>
+
+<p>Now install <a href="http://www.ekiga.org/">Ekiga</a> click on <em>Edit -&gt; Accounts</em> and use the following example to configure yours:</p>
+
+<pre><code>Name: My FritzBox
+Registrar: fritx.box
+User: 1
+Authentication user: 1
+Password: XXX
+Timeout: 3600
+</code></pre>
+
+<p>Registrar can also be the IP of your FritzBox if you have not a correct DNS (like me right now). User and authentication user is the your phones internal number, which can be viewed in the settings.</p>
+
+<p>Now you can make calls from your computer!</p>
+
+<h1 id="vpn:366ab485dd3ee4fd7ece30b75ac01d64">VPN</h1>
+
+<p>You can even log in on your own VPN now and thus phone from anywhere you currently are and access all the computers in your network at home. Go to <em>System -&gt; FRITZ!Box-Benutzer</em> then click on the <em>Edit</em> button to the right for your user. If you have on the following page enabled <em>VPN</em> you can now click on <em>VPN-Einstellungen anzeigen</em> to get the details on how to connect into your own VPN.</p>
+
+<p>AVM also releases nice Videos on YouTube which give good instructions on how to edit those settings and what they are actually about. The relevant ones for this subject are <a href="https://www.youtube.com/watch?v=oJgY4Zyn5Lk">Die FRITZ!Box am IP-basierten Anschluss</a> and <a href="https://www.youtube.com/watch?v=2MLVZi_kH0c">VPN mit der FRITZ!Box </a>.</p>
+
+<p>Some other relevant links might be <a href="https://wiki.ubuntuusers.de/Ekiga">this</a> and <a href="http://wiki.ubuntuusers.de/fritzbox">this</a> you can learn there how to have a GUI for the FritzBox on Linux or add Thunderbird contacts into yourbox for example.</p>
+
+        </div>
+        <footer class="footer"><p>Composed with vim. Published on Mon, Jul 20, 2015 via Hugo.
+</br>© Michael Vetter</p></footer>
+
+        <section class="post-comments">
+
+
+</section>
+
+      </div>
+    </div>
+  </body>
+  
+</html>

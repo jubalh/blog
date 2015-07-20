@@ -13,7 +13,7 @@ maybe with
 
 # publish #
 - on branch master i have the code.
-- then i generate with hugo server.
+- then i generate with *hugo*. hugo server always replaces the baseurl with local one!
 - on i move the public directory in a temp directory.
 - switch to branch *gh-pages* i mv the content of public in here.
 - commit and push

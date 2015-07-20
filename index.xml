@@ -6,8 +6,68 @@
     <description>Recent content on jubalh&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 29 Apr 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 20 Jul 2015 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://jubalh.github.io/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The Amazing Fritz!Box</title>
+      <link>http://jubalh.github.io/blog/post/2015-07-20-fritzbox/</link>
+      <pubDate>Mon, 20 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://jubalh.github.io/blog/post/2015-07-20-fritzbox/</guid>
+      <description>
+
+&lt;p&gt;The Fritz!Box is really a very usable device. And I am quite happy that it is pretty common and many people have it. Here I describe which features I especially like and use.&lt;/p&gt;
+
+&lt;h1 id=&#34;accessing-the-fritz-box:366ab485dd3ee4fd7ece30b75ac01d64&#34;&gt;Accessing the Fritz!Box&lt;/h1&gt;
+
+&lt;p&gt;The easiest way to configure it is probably accessing it via your browser, just navigate to either &lt;em&gt;&lt;a href=&#34;http://192.168.178.1/&#34;&gt;http://192.168.178.1/&lt;/a&gt;&lt;/em&gt; or &lt;em&gt;&lt;a href=&#34;http://fritz.box/&#34;&gt;http://fritz.box/&lt;/a&gt;&lt;/em&gt;. Sometimes I have not set up correctly DNS properly because I have a half-ass configured VPN running on one of my laptops and then I have to use the IP insteda of the domain name.&lt;/p&gt;
+
+&lt;h1 id=&#34;remote-login:366ab485dd3ee4fd7ece30b75ac01d64&#34;&gt;Remote login&lt;/h1&gt;
+
+&lt;p&gt;What&amp;rsquo;s really handy is the feature to log into your box when you are actually not home, for this you either can use DynDNS where you need to register with a provider, some of which cost money. Or you can use AVM&amp;rsquo;s own service called &lt;a href=&#34;https://www.myfritz.net&#34;&gt;MyFRITZ&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Just create a MyFRITZ account, then log into your box when you are home and navigate to:
+&lt;em&gt;Internet -&amp;gt; MyFRITZ!&lt;/em&gt; and click on &lt;em&gt;Add MyFRITZ! account&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;Now you have to give your email adress and details on the MyFRITZ account.&lt;/p&gt;
+
+&lt;p&gt;From now on your box will send its current IP adress to the MyFRITZ service and thus you can access this box via the domain name you got registered on your MyFRITZ account. You also could register several boxes there, for example if you adminster some for your friends or family.&lt;/p&gt;
+
+&lt;p&gt;After this go into &lt;em&gt;System -&amp;gt; FRITZ!Box-Benutzer&lt;/em&gt; and click on &lt;em&gt;Add new user&lt;/em&gt;. Fill in a name, E-Mail and password and most importantly check the box &lt;em&gt;Zugang auch aus dem Internet erlaubt&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;If you type in the adress you got from the MyFRITZ then you will be forwarded to the FritzBox login and you need to log in via the user details you just set not with you MyFRITZ one! Also this user and password is only stored on your device and not on the external service. The external service is just to create a domain name to access your box.&lt;/p&gt;
+
+&lt;p&gt;To view your domain name you need to have enabled: &lt;em&gt;Internet -&amp;gt; Freigaben -&amp;gt; FRITZ!Box-Dienste -&amp;gt; Internetzugriff auf die FRITZ!Box über HTTPS aktiviert&lt;/em&gt; and then take a lookt at &lt;em&gt;Internetadresse Ihrer FRITZ!Box&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;voip-phone:366ab485dd3ee4fd7ece30b75ac01d64&#34;&gt;VOIP Phone&lt;/h1&gt;
+
+&lt;p&gt;Click on &lt;em&gt;Telefonie -&amp;gt; Telefoniegeräte&lt;/em&gt; and then on &lt;em&gt;Neues Gerät einrichten&lt;/em&gt;.
+Choose &lt;em&gt;Telefon (mit und ohne Anrufbeantworter)&lt;/em&gt; and then most importantly &lt;em&gt;LAN/WLAN (IP-Telefon)&lt;/em&gt; the rest is just which numbers to use and whats the internal number is going to be.&lt;/p&gt;
+
+&lt;p&gt;Now install &lt;a href=&#34;http://www.ekiga.org/&#34;&gt;Ekiga&lt;/a&gt; click on &lt;em&gt;Edit -&amp;gt; Accounts&lt;/em&gt; and use the following example to configure yours:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Name: My FritzBox
+Registrar: fritx.box
+User: 1
+Authentication user: 1
+Password: XXX
+Timeout: 3600
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Registrar can also be the IP of your FritzBox if you have not a correct DNS (like me right now). User and authentication user is the your phones internal number, which can be viewed in the settings.&lt;/p&gt;
+
+&lt;p&gt;Now you can make calls from your computer!&lt;/p&gt;
+
+&lt;h1 id=&#34;vpn:366ab485dd3ee4fd7ece30b75ac01d64&#34;&gt;VPN&lt;/h1&gt;
+
+&lt;p&gt;You can even log in on your own VPN now and thus phone from anywhere you currently are and access all the computers in your network at home. Go to &lt;em&gt;System -&amp;gt; FRITZ!Box-Benutzer&lt;/em&gt; then click on the &lt;em&gt;Edit&lt;/em&gt; button to the right for your user. If you have on the following page enabled &lt;em&gt;VPN&lt;/em&gt; you can now click on &lt;em&gt;VPN-Einstellungen anzeigen&lt;/em&gt; to get the details on how to connect into your own VPN.&lt;/p&gt;
+
+&lt;p&gt;AVM also releases nice Videos on YouTube which give good instructions on how to edit those settings and what they are actually about. The relevant ones for this subject are &lt;a href=&#34;https://www.youtube.com/watch?v=oJgY4Zyn5Lk&#34;&gt;Die FRITZ!Box am IP-basierten Anschluss&lt;/a&gt; and &lt;a href=&#34;https://www.youtube.com/watch?v=2MLVZi_kH0c&#34;&gt;VPN mit der FRITZ!Box &lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Some other relevant links might be &lt;a href=&#34;https://wiki.ubuntuusers.de/Ekiga&#34;&gt;this&lt;/a&gt; and &lt;a href=&#34;http://wiki.ubuntuusers.de/fritzbox&#34;&gt;this&lt;/a&gt; you can learn there how to have a GUI for the FritzBox on Linux or add Thunderbird contacts into yourbox for example.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>tongue</title>
@@ -33,7 +93,7 @@ After a while reading articles and watching talks about Go I started to think ab
 &lt;p&gt;I love Go because it let&amp;rsquo;s me stay on the command line all day long. I used vim with the vim-go plugin to write my code. The experience was awesome.
 Go is such a simple and clean language that vim is perfectly capable of handling it without any heavy customization. At work I am coding in PHP using the Symfony2 Framework, and at first I tried to do it with vim. But at some point a collegue made me try out PHPStrom, and I have to say it&amp;rsquo;s good. There is even a vim plugin which makes things much more comfortable. So it&amp;rsquo;s a good trade-off.&lt;/p&gt;
 
-&lt;p&gt;The beautiy about Go is, that you don&amp;rsquo;t need a heavy IDE. &lt;em&gt;Everything&lt;/em&gt; works great with vim.&lt;/p&gt;
+&lt;p&gt;The beauty about Go is, that you don&amp;rsquo;t need a heavy IDE. &lt;em&gt;Everything&lt;/em&gt; works great with vim.&lt;/p&gt;
 
 &lt;p&gt;Usually I opened a terminal, started tmux, created two panels with vim on top and a shell below. I coded in vim, switched to the pane below and built and tested my program.&lt;/p&gt;
 
@@ -56,7 +116,7 @@ Those tools and simple vim was all the IDE-like features I needed. It was all th
 &lt;h1 id=&#34;usage:1de7bbffa5ebe2d1e9f74fd770263431&#34;&gt;Usage&lt;/h1&gt;
 
 &lt;p&gt;My main reason for creating &lt;em&gt;tongue&lt;/em&gt; was to learn Go. But now I find myself using it &lt;strong&gt;a lot&lt;/strong&gt;.
-Whenever I stumble upon a new word a go right into my Terminal and add it to my databse:&lt;/p&gt;
+Whenever I stumble upon a new word I go right into my Terminal and add it to my databse:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;$ tongue add Hallo Merhaba
 &lt;/code&gt;&lt;/pre&gt;
@@ -71,7 +131,7 @@ You have 10 entries in your database:
 ...
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;The &lt;em&gt;&amp;ndash;verbose&lt;/em&gt; flag makes tongue output additional information like in this case &lt;em&gt;You have 1 entries in your database&lt;/em&gt;.
+&lt;p&gt;The &lt;em&gt;&amp;ndash;verbose&lt;/em&gt; flag makes tongue output additional information like in this case &lt;em&gt;You have 10 entries in your database&lt;/em&gt;.
 It should be used when you interact with it on the commandline directly. If you want to process the information with another program or script you shouldn&amp;rsquo;t use this flag. Your output will be easier to parse then.&lt;/p&gt;
 
 &lt;p&gt;Sometimes I mistype so I have to delete a word again:&lt;/p&gt;
@@ -129,7 +189,7 @@ OPTIONS:
 --foreign, -f	display entry where foreign word is &#39;foreign&#39;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Another nice feature is that you can configure &lt;a href=&#34;http://conky.sourceforge.net/&#34;&gt;conky&lt;/a&gt; to display a new random word combination every X minutes, just by adding the following line to you &lt;em&gt;.conkyrc&lt;/em&gt;:&lt;/p&gt;
+&lt;p&gt;Another nice feature is that you can configure &lt;a href=&#34;http://conky.sourceforge.net/&#34;&gt;conky&lt;/a&gt; to display a new random word combination every X minutes, just by adding the following line to your &lt;em&gt;.conkyrc&lt;/em&gt;:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;${execi 5 tongue show}
 &lt;/code&gt;&lt;/pre&gt;

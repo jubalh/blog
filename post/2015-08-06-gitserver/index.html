@@ -89,70 +89,65 @@
 			</div>
       <div class="content-wrapper__inner">
         <div class="post">
-          <h1>Changing Flags</h1>
-          <span class="post-date">Thu, Sep 4, 2014</span>
-          <p>Since March 2014 I am running <a href="http://www.funtoo.org/Welcome">Funtoo Linux</a> on one of my main machines.
-It&rsquo;s a great distribution, I learn a lot while using it.</p>
+          <h1>The dotfiles</h1>
+          <span class="post-date">Thu, Aug 6, 2015</span>
+          
 
-<p>Updating always went smoothly until yesterday, when I had troubles for the first time.</p>
+<p>I store most of my configuration files <a href="https://github.com/jubalh/dotfiles">publicly</a> on GitHub.
+However there are some programs which contain passwords in their config files, among these are irssi, Pidgin and osc.</p>
 
-<p>I started my computer after the update and couldn&rsquo;t connect through to my wifi anymore. I wondered what was the reason but didn&rsquo;t find it fast enough, because I had to go to work. Taking the notebook with me I connect it to the  universities LAN and all goes well.</p>
+<p>It was very annoying to always configure those programs from the start on each computer.</p>
 
-<p>At home again, I try to find the error. I use NetworkManager and nm-applet to configure my connections. nm-applet always gave me an <em>device not present</em>
-I tried to remember if any configuration files changed during updating. Usually I update like this:</p>
+<p>So today I took the time and created a small <em>server</em> out of an old netbook.
+I switch it on on days I know I need a service on it and leave it off if I don&rsquo;t.</p>
 
-<pre><code>  $: emerge --sync
-  $: emerge -aDNuv world
-  $: emerge --depclean
-  $: revdep-rebuild
-  $: dispatch-conf
+<p>It works as a git server so I can store my <em>private-dotfiles</em> in there. I also configured it to connect to my companies VPN and run irssi on it in a tmux session. This way I can reboot/shutdown my main computer as much as I want or can switch to another computer which I need to do from time to time. I would have used my Raspberry Pi for this, but I turned it into a game station and gave it to someone else.</p>
+
+<h1 id="git:e194c838484cb265d5adc8c16402b63b">Git</h1>
+
+<p>On the netbook I run Funtoo and git was already installed on it.</p>
+
+<p>First I created a new user as which we will log in, and added my public SSH keys to the <em>authorized_keys</em> file:</p>
+
+<pre><code>$: ssh root@avalon
+$: useradd git
+$: su - git
+$: mkdir .ssh
+$: chmod 700 .ssh
+$: vim .ssh/authorized_keys
 </code></pre>
 
-<p>I didn&rsquo;t remember any network related changes during <em>dispatch-conf</em>.</p>
+<p>The public SSH key can be found in <code>~/.ssh/id_rsa.pub</code>. So I copied the ones from all of my computers and just pasted them into the file, one after another.
+The reason for using SSH keys is that only computers that got registered (which key got added) can access the repos there, so we won&rsquo;t user a password.</p>
 
-<p>When searching for wlan0 in dmesg the only thing I got was:</p>
+<p>I store all git repos in <code>/home/git/</code>. There I create a folder with the suffix <em>.git</em> for each repo:</p>
 
-<pre><code>  IPv6: ADDRCONF(NETDEV_UP): wlan0: link is not ready
+<pre><code>$: mkdir privatedotfiles.git
+$: cd privatedotfiles.git
+$: git init --bare
+
+Initialized empty Git repository in /home/git/privaterepos.git/
 </code></pre>
 
-<p>I booted into my Debian which is installed alongside Funtoo, in case I break something but need a working environment for work. wifi worked here. Good. It was neither a hardware problem nor was the access point unavailable.</p>
+<p>From my main machine I now run the following to push my private dotfiles to the server:</p>
 
-<p>Not wanting to reboot all the time to try things out (I was listening to an audiobook ;D), I chrooted into Funtoo:</p>
-
-<pre><code>  $: cd /mnt/funtoo
-  $: mount -t proc none proc
-  $: mount --rbind /sys sys
-  $: mount --rbind /dev dev &amp;&amp; cp /etc/resolv.conf etc/
-  $: chroot /mnt/funtoo /bin/bash -i
+<pre><code>$: cd ~/where/my/privatedotfiles/reside
+$: git init
+$: git add . &amp;&amp; git commit -m &quot;initial&quot;
+$: git remote add avalon git@avalon:/home/git/privaterepos.git
+$: git push avalon master
 </code></pre>
 
-<p>I tried an <code>iwlist scan</code> which showed me my access point, seems like network and wifi was generally working, must be an issue of networkmanager or nm-applet.
-On IRC I stumbled upon somebody who solved the same problem a day ago. And he advised me to look for changed use flags.</p>
+<p>And from all the others I just clone to have it on my machine:</p>
 
-<pre><code>  $: emerge -pv networkmanager
+<pre><code>$: git clone git@avalon:/home/git/privaterepos.git
 
-  These are the packages that would be merged, in order:
-
-  Calculating dependencies -  ... done!
-  [ebuild   R    ] net-misc/networkmanager-0.9.8.10-r1  USE=&quot;consolekit dhcpcd introspection nss policykit resolvconf -avahi -bluetooth -connection-sharing -dhclient -gnutls -modemmanager -plugins_openconnect -plugins_openswan -plugins_openvpn -plugins_pptp -plugins_sstp -plugins_vpnc -ppp -systemd {-test} -upower -vala -wext -wifi&quot; 0 k
 </code></pre>
 
-<p>Ohoh! What&rsquo;s that <strong>-wifi</strong>!</p>
-
-<p>Okay let&rsquo;s see if this flag is useful in general:</p>
-
-<pre><code>  $: eix -U wifi
-</code></pre>
-
-<p>Shows me a bunch of packages which contain this flag, for example <em>Thunderbird</em>. Uh? What will this flag do in Thunderbird?
-Okay, since I have no idea, I am going for the standard way and change the use flag on a per package basis.</p>
-
-<p>Adding <code>net-misc/networkmanager wifi</code> to <em>/etc/portage/package.use</em> and doing an <code>emerge -aDNuv networkmanager</code> to rebuild the package I solved the problem.</p>
-
-<p>So because netoworkmanager got an additional flag to enable wifi management which was disabled by default my wifi didn&rsquo;t work anymore. This was the first time I came across a problem like this and I wouldn&rsquo;t have thought about this before. Let&rsquo;s keep this in mind!</p>
+<p>References: <a href="https://git-scm.com/book/it/v2/Git-on-the-Server-Setting-Up-the-Server">git-scm</a></p>
 
         </div>
-        <footer class="footer"><p>Composed with vim. Published on Thu, Sep 4, 2014 via Hugo.
+        <footer class="footer"><p>Composed with vim. Published on Thu, Aug 6, 2015 via Hugo.
 </br>© Michael Vetter</p></footer>
 
         <section class="post-comments">

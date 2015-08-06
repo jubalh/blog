@@ -3,8 +3,18 @@
   
   <url>
     <loc>http://jubalh.github.io/blog/</loc>
-    <lastmod>2015-07-20T00:00:00+00:00</lastmod>
+    <lastmod>2015-08-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://jubalh.github.io/blog/post/2015-08-06-gitserver/</loc>
+    <lastmod>2015-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://jubalh.github.io/blog/post/2015-07-21-ssh_on_suse/</loc>
+    <lastmod>2015-07-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>

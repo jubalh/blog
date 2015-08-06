@@ -1,4 +1,4 @@
-    <!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
@@ -18,13 +18,13 @@
 		<link href='http://fonts.googleapis.com/css?family=Raleway:300,400,700' rel='stylesheet' type='text/css'>
 
 		
-		<link href="http://jubalh.github.io/blog/tags/linux/index.xml" rel="alternate" type="application/rss+xml" title="jubalh&#39;s blog" />
+		<link href="" rel="alternate" type="application/rss+xml" title="jubalh&#39;s blog" />
 		
 		<script src="http://jubalh.github.io/blog/js/jquery.min.js"></script>
 	</head>
 
-    <body>
-        <div class="sidebar" id="sidebar">
+  <body>
+    <div class="sidebar" id="sidebar">
 	<div class="header">
 		<h1 class="title"><a href="http://jubalh.github.io/blog/"><img id="logo" src="http://jubalh.github.io/blog/images/avatar.jpg"></a></h1>
 		<span class="tagline">jubalh's blog<br>a not so mental note</span>
@@ -83,21 +83,76 @@
 	</div>
 </div>
 
-        <div class="content-wrapper">
-            <div class="content-wrapper__inner">
-                
-                <h2>2014</h2>
-                <ul id="list">
-                    
-                    <li>
-                        <a href="http://jubalh.github.io/blog/post/2014-12-13-devlxqttoo/">LXQt development on Funtoo </a>
-                        <div class="meta">Sat, Dec 13, 2014</div>
-                    </li>
-                    
-                </ul>
-                
-            </div>
+    <div class="content-wrapper">
+			<div id="cover-photo-container">
+				<img id="cover-photo" src="http://jubalh.github.io/blog/images/cover.jpg ">
+			</div>
+      <div class="content-wrapper__inner">
+        <div class="post">
+          <h1>Enable ssh on openSUSE</h1>
+          <span class="post-date">Tue, Jul 21, 2015</span>
+          <p>Okay, going to explain how to install and enable ssh on your openSUSE box here. Some people didn&rsquo;t seem to get it to work altough there is <a href="http://www.fene-blog.de/linux/ssh-zugriff-opensuse-112-113-installieren-freischalten-aktivieren/">an older article</a> describing how to do it with SysVInit. My article will have the same format just with the new commands. On the <a href="https://en.opensuse.org/SDB:OpenSSH_basics">openSUSE wiki</a> they explain it via yast.</p>
+
+<ul>
+<li>Check if package is installed:</li>
+</ul>
+
+<pre><code>zypper if openssh
+</code></pre>
+
+<p>Install package if it isn&rsquo;t installed:</p>
+
+<pre><code>zypper in openssh
+</code></pre>
+
+<ul>
+<li>Check if ssh server is running:</li>
+</ul>
+
+<pre><code>systemctl status sshd
+</code></pre>
+
+<p>Start service:</p>
+
+<pre><code>systemctl start sshd vs rcsshdstart?
+</code></pre>
+
+<p>Check if service is launched at startup:</p>
+
+<pre><code>systemctl is-enabled sshd
+</code></pre>
+
+<p>Launch it on system startup:</p>
+
+<pre><code>systemctl enable sshd
+</code></pre>
+
+<ul>
+<li>Check if Firewall blocks port 22 for ssh:</li>
+</ul>
+
+<pre><code>SuSEfirewall2 status | grep 22
+</code></pre>
+
+<p>If you don&rsquo;t get any output from that command open the port with:</p>
+
+<pre><code>SuSEfirewall2 open EXT TCP ssh
+SuSEfirewall2
+</code></pre>
+
+<p>That&rsquo;s it!</p>
+
         </div>
-    </body>
-    
+        <footer class="footer"><p>Composed with vim. Published on Tue, Jul 21, 2015 via Hugo.
+</br>© Michael Vetter</p></footer>
+
+        <section class="post-comments">
+
+
+</section>
+
+      </div>
+    </div>
+  </body>
+  
 </html>

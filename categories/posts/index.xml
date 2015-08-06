@@ -6,8 +6,130 @@
     <description>Recent content in Posts on jubalh&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Jul 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 06 Aug 2015 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://jubalh.github.io/blog/categories/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The dotfiles</title>
+      <link>http://jubalh.github.io/blog/post/2015-08-06-gitserver/</link>
+      <pubDate>Thu, 06 Aug 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://jubalh.github.io/blog/post/2015-08-06-gitserver/</guid>
+      <description>
+
+&lt;p&gt;I store most of my configuration files &lt;a href=&#34;https://github.com/jubalh/dotfiles&#34;&gt;publicly&lt;/a&gt; on GitHub.
+However there are some programs which contain passwords in their config files, among these are irssi, Pidgin and osc.&lt;/p&gt;
+
+&lt;p&gt;It was very annoying to always configure those programs from the start on each computer.&lt;/p&gt;
+
+&lt;p&gt;So today I took the time and created a small &lt;em&gt;server&lt;/em&gt; out of an old netbook.
+I switch it on on days I know I need a service on it and leave it off if I don&amp;rsquo;t.&lt;/p&gt;
+
+&lt;p&gt;It works as a git server so I can store my &lt;em&gt;private-dotfiles&lt;/em&gt; in there. I also configured it to connect to my companies VPN and run irssi on it in a tmux session. This way I can reboot/shutdown my main computer as much as I want or can switch to another computer which I need to do from time to time. I would have used my Raspberry Pi for this, but I turned it into a game station and gave it to someone else.&lt;/p&gt;
+
+&lt;h1 id=&#34;git:e194c838484cb265d5adc8c16402b63b&#34;&gt;Git&lt;/h1&gt;
+
+&lt;p&gt;On the netbook I run Funtoo and git was already installed on it.&lt;/p&gt;
+
+&lt;p&gt;First I created a new user as which we will log in, and added my public SSH keys to the &lt;em&gt;authorized_keys&lt;/em&gt; file:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$: ssh root@avalon
+$: useradd git
+$: su - git
+$: mkdir .ssh
+$: chmod 700 .ssh
+$: vim .ssh/authorized_keys
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The public SSH key can be found in &lt;code&gt;~/.ssh/id_rsa.pub&lt;/code&gt;. So I copied the ones from all of my computers and just pasted them into the file, one after another.
+The reason for using SSH keys is that only computers that got registered (which key got added) can access the repos there, so we won&amp;rsquo;t user a password.&lt;/p&gt;
+
+&lt;p&gt;I store all git repos in &lt;code&gt;/home/git/&lt;/code&gt;. There I create a folder with the suffix &lt;em&gt;.git&lt;/em&gt; for each repo:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$: mkdir privatedotfiles.git
+$: cd privatedotfiles.git
+$: git init --bare
+
+Initialized empty Git repository in /home/git/privaterepos.git/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;From my main machine I now run the following to push my private dotfiles to the server:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$: cd ~/where/my/privatedotfiles/reside
+$: git init
+$: git add . &amp;amp;&amp;amp; git commit -m &amp;quot;initial&amp;quot;
+$: git remote add avalon git@avalon:/home/git/privaterepos.git
+$: git push avalon master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And from all the others I just clone to have it on my machine:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$: git clone git@avalon:/home/git/privaterepos.git
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;References: &lt;a href=&#34;https://git-scm.com/book/it/v2/Git-on-the-Server-Setting-Up-the-Server&#34;&gt;git-scm&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Enable ssh on openSUSE</title>
+      <link>http://jubalh.github.io/blog/post/2015-07-21-ssh_on_suse/</link>
+      <pubDate>Tue, 21 Jul 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://jubalh.github.io/blog/post/2015-07-21-ssh_on_suse/</guid>
+      <description>&lt;p&gt;Okay, going to explain how to install and enable ssh on your openSUSE box here. Some people didn&amp;rsquo;t seem to get it to work altough there is &lt;a href=&#34;http://www.fene-blog.de/linux/ssh-zugriff-opensuse-112-113-installieren-freischalten-aktivieren/&#34;&gt;an older article&lt;/a&gt; describing how to do it with SysVInit. My article will have the same format just with the new commands. On the &lt;a href=&#34;https://en.opensuse.org/SDB:OpenSSH_basics&#34;&gt;openSUSE wiki&lt;/a&gt; they explain it via yast.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Check if package is installed:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;zypper if openssh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Install package if it isn&amp;rsquo;t installed:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;zypper in openssh
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Check if ssh server is running:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;systemctl status sshd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Start service:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;systemctl start sshd vs rcsshdstart?
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Check if service is launched at startup:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;systemctl is-enabled sshd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Launch it on system startup:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;systemctl enable sshd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Check if Firewall blocks port 22 for ssh:&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;&lt;code&gt;SuSEfirewall2 status | grep 22
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you don&amp;rsquo;t get any output from that command open the port with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SuSEfirewall2 open EXT TCP ssh
+SuSEfirewall2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;That&amp;rsquo;s it!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>The Amazing Fritz!Box</title>

@@ -7,7 +7,7 @@ theme = "jubal2"
 contentdir = "content"
 layoutdir = "layout"
 publishdir = "public"
-baseurl = "http://jubalh.github.io/blog"
+baseurl = "http://blog.iodoru.org"
 
 canonifyurls = true
 
@@ -16,7 +16,7 @@ canonifyurls = true
 	github  = "jubalh"
 	description = "a not so mental note"
 	twitter = "jubalh_"
-	email = "g.bluehut@gmail.com"
+	email = "jubalh@openmailbox.org"
 	cv = "/pages/cv"
 	logo = "/images/avatar.jpg"
 	coverphoto = "cover.jpg"

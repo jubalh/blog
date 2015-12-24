@@ -10,7 +10,6 @@
 }
 
 html, body {
-  height: 100%;
   width: 100%;
   -webkit-font-smoothing: antialiased;
 }
@@ -116,13 +115,13 @@ a:hover {
 }
 
 .categories {
-  border-top: 1px solid #e7e7e7;
+  border-top: 1px solid #333;
   margin-top: 1em;
   padding-top: 1.5em;
 }
 
 .posts {
-  border-top: 1px solid #e7e7e7;
+  border-top: 1px solid #333;
   margin-top: 1em;
   padding-top: 1.5em;
   padding-bottom: 1.25em;
@@ -130,7 +129,7 @@ a:hover {
 
 .footer {
   font-size: 0.95em;
-  border-top: 1px solid #e7e7e7;
+  border-top: 1px solid #333;
   padding-top: 1.25em;
   padding-bottom: 1.5em;
   overflow: hidden;
@@ -188,11 +187,14 @@ a:hover {
 
 /* standard */
 .post pre {
-  border: 1px solid #ddd;
+  border: 1px transparent;
   background-color: #333;
   padding: 4px;
   border-radius: 4px;
-  overflow: scroll;
+  overflow: auto;
+  /* change in case you want desktop only */
+  max-height: 300px;
+  margin-bottom: 1.45em;
 }
 
 .post p {
@@ -209,10 +211,11 @@ a:hover {
 
 .post code {
   white-space: pre-line;
-  border: 1px solid #ddd;
+  border: 1px transparent;
   background-color: #333;
   color: #CF8E23;
   padding: 0 .2em;
+  border-radius: 2px;
 }
 
 .post pre code {
@@ -251,7 +254,6 @@ a:hover {
   /*padding-left: 11em;*/
   padding-left: 2em;
   padding-right: 2.125em;
-  border-right: 1px solid #e7e7e7;
 }
 
 .content {
@@ -295,7 +297,7 @@ a:hover {
   display: none;
   padding: 15px 5px 0px 0px;
   margin-bottom: 10px;
-  border-bottom: 1px solid #e7e7e7;
+  border-bottom: 1px solid #333;
 }
 
 #sidebar-button:active,

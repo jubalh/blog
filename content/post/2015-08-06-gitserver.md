@@ -58,10 +58,9 @@ And from all the others I just clone to have it on my machine:
 
 ```
 $: git clone git@avalon:/home/git/privaterepos.git
-
 ```
 
-In case you already have a git repository on your machine and just want to add the new remote repository use 
+In case you already have a git repository on your machine and just want to add the new remote repository use
 
 ```
 git remote add avalon ssh://git@avalonsipordomain.net:23/home/git/privaterepos.git

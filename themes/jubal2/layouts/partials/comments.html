@@ -1,4 +1,23 @@
 <section class="post-comments">
+
 <!--<a class="muut" href="https://muut.com/i/{{ .Site.Params.muut }}/comments:{{ .Title }}">Comments</a>-->
 <!--<script src="//cdn.muut.com/1/moot.min.js"></script>-->
+
+<div id="disqus_thread"></div>
+<script>
+   var disqus_config = function () {
+   this.page.url = blog.iodoru.org;  // Replace PAGE_URL with your page's canonical URL variable
+   this.page.identifier = {{ .Title }}; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+   };
+(function() {  // DON'T EDIT BELOW THIS LINE
+ var d = document, s = d.createElement('script');
+
+ s.src = '//jubalh.disqus.com/embed.js';
+
+ s.setAttribute('data-timestamp', +new Date());
+ (d.head || d.body).appendChild(s);
+ })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+
 </section>
